@@ -225,7 +225,8 @@ puede mantenerse intacto durante esta comprobación.
 - Las relaciones del ORM y las migraciones SQL de la carpeta `db`.
 - Los diagramas de [arquitectura, OLTP y estrella](ARQUITECTURA.md).
 - La ejecución ETL, los reportes y el registro de pruebas.
-- El repositorio del grupo y sus evidencias reales cuando se publique.
+- El repositorio público del proyecto y sus evidencias reales:
+  https://github.com/COMANDAREMOS/itsc-sistema-academico-postgresql.
 
 La guía recibida también evalúa contribuciones de cada integrante, PRs
 revisados, Issues, tablero y etiquetas por hito. Esas evidencias corresponden

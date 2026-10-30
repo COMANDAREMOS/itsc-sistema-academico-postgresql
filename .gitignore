@@ -11,4 +11,6 @@ frontend/.next/
 *.log
 *.dump
 *.zip
+~$*
+*.tmp
 docs/proyecto-anterior-huellas.json

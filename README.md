@@ -11,6 +11,17 @@ Repositorio público del proyecto nuevo:
 La aplicación se ejecuta localmente en `http://localhost:3000`. GitHub conserva
 el código y los documentos; no ejecuta el servidor NestJS ni PostgreSQL.
 
+## Documento del práctico y archivos para revisión
+
+- [Práctico en Word con carátula diagramas y capturas](docs/Practico_ITSC_PostgreSQL_Vicente_Apaza_Bautista.docx).
+- [Base de datos PostgreSQL con datos ficticios](db/ITSC_PostgreSQL_Demo.sql).
+- [Diagrama de clases ejecutable en HTML](frontend/public/diagrama-clases.html).
+- [Diagramas de arquitectura clases y esquema estrella](docs/diagramas/).
+
+Para ejecutar el diagrama sin instalar el sistema, descargar el HTML y abrirlo
+en un navegador. GitHub permite consultar su código; la aplicación completa
+se inicia con las instrucciones de instalación.
+
 Este es un trabajo académico con personas, empresas, importes y movimientos
 ficticios. Las reglas de calificación reproducen la referencia utilizada en el
 práctico; no constituyen una verificación legal actual de normativa institucional.
