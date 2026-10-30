@@ -1,0 +1,13 @@
+import { spawn } from 'node:child_process';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { config } from 'dotenv';
+const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
+config({path:resolve(root,'.env'),quiet:true});
+const db=new URL(process.env.DATABASE_URL||'');
+if(db.pathname!=='/itsc_postgres' || !['localhost','127.0.0.1'].includes(db.hostname)) throw Error('La exportación de demostración solo utiliza la base local itsc_postgres.');
+const output=resolve(root,'db/ITSC_PostgreSQL_Demo.sql');
+const exe=process.platform==='win32'?'C:\\Program Files\\PostgreSQL\\18\\bin\\pg_dump.exe':'pg_dump';
+const child=spawn(exe,['-h',db.hostname,'-p',db.port||'5432','-U',decodeURIComponent(db.username),'-d',db.pathname.slice(1),'--no-owner','--no-privileges','--exclude-table-data=public.app_usuarios','--exclude-table-data=public.app_intentos','--exclude-table-data=public.app_auditoria','--exclude-table-data=dw.etl_ejecuciones','-f',output],{windowsHide:true,stdio:'inherit',env:{...process.env,PGPASSWORD:decodeURIComponent(db.password)}});
+child.on('error',error=>{console.error(error.message);process.exitCode=1;});
+child.on('exit',code=>{if(code)process.exitCode=code;else console.log('SQL de demostración exportado sin cuentas de acceso ni registros de sesión.');});

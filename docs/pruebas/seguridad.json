@@ -1,0 +1,165 @@
+{
+  "resumen": {
+    "total": 31,
+    "correctas": 31,
+    "fallos": 0,
+    "duracion_segundos": 1.26
+  },
+  "pruebas": [
+    {
+      "nombre": "El origen hostil se rechaza antes de procesar una escritura",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "No se admiten escrituras sin cabecera CSRF de aplicación",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Un origen parecido a localhost se rechaza",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Un formulario de login de otro origen se rechaza",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Una cookie con codificación inválida produce 401",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "Un token inventado produce 401",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Una firma de sesión modificada produce 401",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "La inyección SQL en usuario no permite autenticación",
+      "estado": "correcto",
+      "milisegundos": 38
+    },
+    {
+      "nombre": "Los objetos JSON como usuario o contraseña se rechazan",
+      "estado": "correcto",
+      "milisegundos": 2
+    },
+    {
+      "nombre": "Un objeto con toString no causa un fallo interno",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Un array vacío no permite autenticación",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "El texto excesivo se rechaza sin error interno",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Un objeto como identificador de matrícula se rechaza",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "No se crean accesos con contraseña mayor al límite de login",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "Caja no puede crear usuarios administradores",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Caja no puede activar ni desactivar usuarios",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Caja no puede registrar calificaciones",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "Docente no puede leer el detalle de una oferta ajena",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Docente no puede consultar la planilla de una oferta ajena",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Docente no puede crear evaluaciones de una oferta ajena",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Un filtro docente ajeno no sustituye el alcance de la sesión",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Login incorrecto 1 de 5 permite respuesta 401",
+      "estado": "correcto",
+      "milisegundos": 45
+    },
+    {
+      "nombre": "Login incorrecto 2 de 5 permite respuesta 401",
+      "estado": "correcto",
+      "milisegundos": 52
+    },
+    {
+      "nombre": "Login incorrecto 3 de 5 permite respuesta 401",
+      "estado": "correcto",
+      "milisegundos": 40
+    },
+    {
+      "nombre": "Login incorrecto 4 de 5 permite respuesta 401",
+      "estado": "correcto",
+      "milisegundos": 35
+    },
+    {
+      "nombre": "Login incorrecto 5 de 5 permite respuesta 401",
+      "estado": "correcto",
+      "milisegundos": 42
+    },
+    {
+      "nombre": "El sexto intento de login se limita con 429",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "El límite no se evita cambiando mayúsculas del mismo usuario",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "El límite de cinco intentos también resiste solicitudes concurrentes",
+      "estado": "correcto",
+      "milisegundos": 265
+    },
+    {
+      "nombre": "La desactivación de un usuario QA revoca inmediatamente su sesión",
+      "estado": "correcto",
+      "milisegundos": 172
+    },
+    {
+      "nombre": "Cambiar contraseña QA revoca el token anterior y admite la nueva clave",
+      "estado": "correcto",
+      "milisegundos": 264
+    }
+  ]
+}

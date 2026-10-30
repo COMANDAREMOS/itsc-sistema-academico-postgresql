@@ -1,0 +1,55 @@
+{
+  "total": 12,
+  "correctas": 12,
+  "fallos": 0,
+  "pruebas": [
+    {
+      "nombre": "Administración puede consultar el almacén",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "DOCENTE no consulta análisis institucional",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "DOCENTE no ejecuta ETL",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "CAJA no consulta análisis institucional",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "CAJA no ejecuta ETL",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "ETL completo y conteos coherentes 1",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "ETL completo y conteos coherentes 2",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "Los hechos no se duplican al repetir ETL",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "Las dimensiones conservan su origen operativo",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "Las vistas analíticas coinciden con los hechos",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "La actualización simultánea comparte un proceso seguro",
+      "estado": "correcto"
+    },
+    {
+      "nombre": "ETL conserva matrículas, resultados y pagos operativos",
+      "estado": "correcto"
+    }
+  ]
+}

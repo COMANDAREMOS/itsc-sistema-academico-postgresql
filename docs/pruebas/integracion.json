@@ -1,0 +1,1547 @@
+{
+  "fecha_utc": "2026-10-30T20:23:51.552Z",
+  "api": "http://127.0.0.1:4002/api",
+  "solo_lectura": false,
+  "prefijo_datos_prueba": "QA_PG_MVVF6TOD",
+  "duracion_segundos": 4.93,
+  "total": 276,
+  "correctas": 276,
+  "fallos": 0,
+  "omitidas": 0,
+  "registros_creados_en_base_pruebas": [
+    {
+      "modulo": "estudiantes",
+      "id": 1011
+    },
+    {
+      "modulo": "estudiantes",
+      "id": 1012
+    },
+    {
+      "modulo": "docentes",
+      "id": 84
+    },
+    {
+      "modulo": "carreras",
+      "id": 16
+    },
+    {
+      "modulo": "materias",
+      "id": 301
+    },
+    {
+      "modulo": "materias",
+      "id": 302
+    },
+    {
+      "modulo": "materias",
+      "id": 303
+    },
+    {
+      "modulo": "planes",
+      "id": 16
+    },
+    {
+      "modulo": "periodos",
+      "id": 12
+    },
+    {
+      "modulo": "periodos",
+      "id": 13
+    },
+    {
+      "modulo": "periodos",
+      "id": 14
+    },
+    {
+      "modulo": "grupos",
+      "id": 8
+    },
+    {
+      "modulo": "ofertas",
+      "id": 31
+    },
+    {
+      "modulo": "ofertas",
+      "id": 32
+    },
+    {
+      "modulo": "ofertas",
+      "id": 33
+    },
+    {
+      "modulo": "ofertas",
+      "id": 34
+    },
+    {
+      "modulo": "ofertas",
+      "id": 35
+    },
+    {
+      "modulo": "matriculas",
+      "id": 66
+    },
+    {
+      "modulo": "matriculas",
+      "id": 67
+    },
+    {
+      "modulo": "matriculas",
+      "id": 68
+    },
+    {
+      "modulo": "matriculas",
+      "id": 69
+    },
+    {
+      "modulo": "inscripciones",
+      "id": 170
+    },
+    {
+      "modulo": "aulas",
+      "id": 11
+    },
+    {
+      "modulo": "aulas",
+      "id": 12
+    },
+    {
+      "modulo": "horarios",
+      "id": 19
+    },
+    {
+      "modulo": "horarios",
+      "id": 20
+    },
+    {
+      "modulo": "horarios",
+      "id": 21
+    },
+    {
+      "modulo": "ofertas",
+      "id": 36
+    },
+    {
+      "modulo": "evaluaciones",
+      "id": 34
+    },
+    {
+      "modulo": "evaluaciones",
+      "id": 35
+    },
+    {
+      "modulo": "evaluaciones",
+      "id": 36
+    },
+    {
+      "modulo": "sesiones",
+      "id": 10
+    },
+    {
+      "modulo": "cargos",
+      "id": 57
+    },
+    {
+      "modulo": "pagos",
+      "id": 30
+    },
+    {
+      "modulo": "pagos",
+      "id": 31
+    },
+    {
+      "modulo": "cargos",
+      "id": 58
+    },
+    {
+      "modulo": "tramites",
+      "id": 6
+    },
+    {
+      "modulo": "pasantias",
+      "id": 6
+    }
+  ],
+  "pruebas": [
+    {
+      "nombre": "Servicio disponible y conectado a PostgreSQL",
+      "estado": "correcto",
+      "milisegundos": 252
+    },
+    {
+      "nombre": "Sin sesión no se permite consultar el sistema",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Las credenciales incorrectas se rechazan",
+      "estado": "correcto",
+      "milisegundos": 142
+    },
+    {
+      "nombre": "Inicio de sesión ADMIN y cookie protegida",
+      "estado": "correcto",
+      "milisegundos": 49
+    },
+    {
+      "nombre": "Consulta de sesión ADMIN sin datos de contraseña",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Inicio de sesión DOCENTE y cookie protegida",
+      "estado": "correcto",
+      "milisegundos": 50
+    },
+    {
+      "nombre": "Consulta de sesión DOCENTE sin datos de contraseña",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "Inicio de sesión CAJA y cookie protegida",
+      "estado": "correcto",
+      "milisegundos": 48
+    },
+    {
+      "nombre": "Consulta de sesión CAJA sin datos de contraseña",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Las escrituras requieren la cabecera de verificación",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Las escrituras rechazan un origen ajeno",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "No es posible cambiar la contraseña con la clave actual incorrecta",
+      "estado": "correcto",
+      "milisegundos": 52
+    },
+    {
+      "nombre": "Metadatos de módulos ADMIN",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Lista ADMIN: estudiantes",
+      "estado": "correcto",
+      "milisegundos": 31
+    },
+    {
+      "nombre": "Lista ADMIN: materias",
+      "estado": "correcto",
+      "milisegundos": 20
+    },
+    {
+      "nombre": "Lista ADMIN: planes",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Lista ADMIN: plan_materias",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Lista ADMIN: prerrequisitos",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Lista ADMIN: docentes",
+      "estado": "correcto",
+      "milisegundos": 93
+    },
+    {
+      "nombre": "Lista ADMIN: catalogo",
+      "estado": "correcto",
+      "milisegundos": 98
+    },
+    {
+      "nombre": "Lista ADMIN: carreras",
+      "estado": "correcto",
+      "milisegundos": 100
+    },
+    {
+      "nombre": "Lista ADMIN: periodos",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Lista ADMIN: inscripcion_grupal",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Lista ADMIN: matriculas",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Lista ADMIN: grupos",
+      "estado": "correcto",
+      "milisegundos": 37
+    },
+    {
+      "nombre": "Lista ADMIN: integrantes",
+      "estado": "correcto",
+      "milisegundos": 34
+    },
+    {
+      "nombre": "Lista ADMIN: grupo_materias",
+      "estado": "correcto",
+      "milisegundos": 36
+    },
+    {
+      "nombre": "Lista ADMIN: aulas",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Lista ADMIN: ofertas",
+      "estado": "correcto",
+      "milisegundos": 22
+    },
+    {
+      "nombre": "Lista ADMIN: evaluaciones",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Lista ADMIN: notas_grupo",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Lista ADMIN: inscripciones",
+      "estado": "correcto",
+      "milisegundos": 38
+    },
+    {
+      "nombre": "Lista ADMIN: sesiones",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Lista ADMIN: asistencia_grupo",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Lista ADMIN: notas",
+      "estado": "correcto",
+      "milisegundos": 27
+    },
+    {
+      "nombre": "Lista ADMIN: excepciones",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Lista ADMIN: horarios",
+      "estado": "correcto",
+      "milisegundos": 55
+    },
+    {
+      "nombre": "Lista ADMIN: cierres",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Lista ADMIN: recuperaciones",
+      "estado": "correcto",
+      "milisegundos": 19
+    },
+    {
+      "nombre": "Lista ADMIN: cargos",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Lista ADMIN: asistencias",
+      "estado": "correcto",
+      "milisegundos": 44
+    },
+    {
+      "nombre": "Lista ADMIN: pagos",
+      "estado": "correcto",
+      "milisegundos": 19
+    },
+    {
+      "nombre": "Lista ADMIN: documentos",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Lista ADMIN: saldos",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Lista ADMIN: tramites",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Lista ADMIN: boletin",
+      "estado": "correcto",
+      "milisegundos": 45
+    },
+    {
+      "nombre": "Lista ADMIN: pasantias",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Lista ADMIN: proyectos",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "Lista ADMIN: usuarios",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Lista ADMIN: analitica",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Lista ADMIN: defensas",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Lista ADMIN: auditoria",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Lista ADMIN: reportes",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "Lista ADMIN: tribunales",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Opciones ADMIN: carreras",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Opciones ADMIN: reglas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Opciones ADMIN: materias",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Opciones ADMIN: periodos",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Opciones ADMIN: planes",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Opciones ADMIN: docentes",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Opciones ADMIN: grupos",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Opciones ADMIN: matriculas",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Opciones ADMIN: ofertas",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Opciones ADMIN: estudiantes",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Opciones ADMIN: aulas",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Opciones ADMIN: evaluaciones",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Opciones ADMIN: sesiones",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Opciones ADMIN: inscripciones",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Opciones ADMIN: tipos_documento",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Opciones ADMIN: cargos",
+      "estado": "correcto",
+      "milisegundos": 20
+    },
+    {
+      "nombre": "Opciones ADMIN: proyectos",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Opciones ADMIN: modalidades",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Opciones ADMIN: defensas",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Panel por gestión ADMIN",
+      "estado": "correcto",
+      "milisegundos": 33
+    },
+    {
+      "nombre": "Metadatos de módulos DOCENTE",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Lista DOCENTE: catalogo",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Lista DOCENTE: evaluaciones",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Lista DOCENTE: ofertas",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "Lista DOCENTE: notas_grupo",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "Lista DOCENTE: notas",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Lista DOCENTE: sesiones",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Lista DOCENTE: horarios",
+      "estado": "correcto",
+      "milisegundos": 31
+    },
+    {
+      "nombre": "Lista DOCENTE: asistencia_grupo",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Lista DOCENTE: asistencias",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Lista DOCENTE: cierres",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Lista DOCENTE: reportes",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Lista DOCENTE: recuperaciones",
+      "estado": "correcto",
+      "milisegundos": 19
+    },
+    {
+      "nombre": "Lista DOCENTE: boletin",
+      "estado": "correcto",
+      "milisegundos": 33
+    },
+    {
+      "nombre": "Opciones DOCENTE: ofertas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Opciones DOCENTE: evaluaciones",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Opciones DOCENTE: inscripciones",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Opciones DOCENTE: sesiones",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Panel por gestión DOCENTE",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Metadatos de módulos CAJA",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Lista CAJA: estudiantes",
+      "estado": "correcto",
+      "milisegundos": 15
+    },
+    {
+      "nombre": "Lista CAJA: cargos",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Lista CAJA: pagos",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "Lista CAJA: saldos",
+      "estado": "correcto",
+      "milisegundos": 19
+    },
+    {
+      "nombre": "Lista CAJA: reportes",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Opciones CAJA: matriculas",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Opciones CAJA: cargos",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Panel por gestión CAJA",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Catálogo inicial: al menos 1000 estudiantes",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Catálogo inicial: al menos 80 docentes",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Catálogo inicial: al menos 12 carreras",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Catálogo inicial: al menos 4 grupos",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "La paginación de estudiantes no repite filas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "La búsqueda encuentra un registro exacto",
+      "estado": "correcto",
+      "milisegundos": 27
+    },
+    {
+      "nombre": "La búsqueda escapa comodines y trata el texto como datos",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Una página inválida se rechaza",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Un módulo inexistente devuelve 404",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Docente sin acceso al catálogo completo de estudiantes",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Docente sin acceso a administración de usuarios",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Caja sin acceso a calificaciones",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Caja sin acceso a administración de usuarios",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Docente consulta únicamente ofertas asignadas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "La administración no puede desactivar su propio acceso",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Crear estudiante de pruebas",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Crear segundo estudiante de pruebas",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Consultar y editar estudiante",
+      "estado": "correcto",
+      "milisegundos": 29
+    },
+    {
+      "nombre": "No se duplica el documento ni el registro estudiantil",
+      "estado": "correcto",
+      "milisegundos": 26
+    },
+    {
+      "nombre": "No se acepta nacimiento futuro",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "No se acepta una fecha inexistente",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "No se acepta correo inválido",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "Crear docente de pruebas",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Consultar y editar docente",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "Crear carrera independiente",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Consultar y editar carrera",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Crear materia de pruebas 1",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Crear materia de pruebas 2",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Crear materia de pruebas 3",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Consultar y editar materia",
+      "estado": "correcto",
+      "milisegundos": 23
+    },
+    {
+      "nombre": "Crear plan independiente",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Consultar y editar plan",
+      "estado": "correcto",
+      "milisegundos": 23
+    },
+    {
+      "nombre": "Vincular materia 301 al plan",
+      "estado": "correcto",
+      "milisegundos": 15
+    },
+    {
+      "nombre": "Vincular materia 302 al plan",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Vincular materia 303 al plan",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Un prerrequisito no puede apuntar a sí mismo",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Crear prerrequisito válido",
+      "estado": "correcto",
+      "milisegundos": 31
+    },
+    {
+      "nombre": "No se permiten ciclos en prerrequisitos",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Retirar el prerrequisito de prueba",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Crear gestión independiente",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Crear gestión superpuesta para verificar cruces",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Crear gestión sin superposición de fechas",
+      "estado": "correcto",
+      "milisegundos": 20
+    },
+    {
+      "nombre": "Consultar y editar gestión vacía",
+      "estado": "correcto",
+      "milisegundos": 36
+    },
+    {
+      "nombre": "La gestión rechaza fechas invertidas",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Crear grupo por carrera y gestión",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Crear oferta asignada al docente de demostración",
+      "estado": "correcto",
+      "milisegundos": 25
+    },
+    {
+      "nombre": "Crear oferta asignada a otro docente",
+      "estado": "correcto",
+      "milisegundos": 15
+    },
+    {
+      "nombre": "Crear oferta independiente de cupo uno",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Crear oferta en gestión superpuesta",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Crear oferta en gestión separada",
+      "estado": "correcto",
+      "milisegundos": 22
+    },
+    {
+      "nombre": "Asignar oferta 31 al grupo",
+      "estado": "correcto",
+      "milisegundos": 29
+    },
+    {
+      "nombre": "Asignar oferta 32 al grupo",
+      "estado": "correcto",
+      "milisegundos": 20
+    },
+    {
+      "nombre": "Matricular estudiante A en su plan y gestión",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Matricular estudiante B en su plan y gestión",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Matricular estudiante en gestión distinta",
+      "estado": "correcto",
+      "milisegundos": 26
+    },
+    {
+      "nombre": "Matricular estudiante en carrera distinta",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "No se duplica una matrícula en la misma carrera y gestión",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Candidatos del grupo filtran carrera y gestión",
+      "estado": "correcto",
+      "milisegundos": 15
+    },
+    {
+      "nombre": "No se asignan matrículas de otra carrera",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "No se asignan matrículas de otra gestión",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "La inscripción directa requiere pertenencia al grupo",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "La selección de inscripción grupal rechaza duplicados",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "El lote completo se revierte si incluye una matrícula de otra carrera",
+      "estado": "correcto",
+      "milisegundos": 81
+    },
+    {
+      "nombre": "La inscripción por grupo crea integrante y dos materias",
+      "estado": "correcto",
+      "milisegundos": 31
+    },
+    {
+      "nombre": "Repetir la inscripción por grupo es idempotente",
+      "estado": "correcto",
+      "milisegundos": 19
+    },
+    {
+      "nombre": "No se supera el cupo del grupo",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Se conserva el tamaño del grupo después de rechazar exceso de cupo",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Inscripción individual válida en una oferta independiente",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "No se supera el cupo de una oferta",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "No se puede retirar del grupo una matrícula con inscripciones",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "No se retira una materia del plan con inscripciones existentes",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Crear aula de pruebas",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Crear segunda aula de pruebas",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Crear horario válido",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "No se admite un horario con horas invertidas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "No se permite cruce de aula",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "No se permite cruce de grupo usando otra aula y docente",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "No se permite cruce de docente",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "No se permiten cruces entre gestiones con fechas superpuestas",
+      "estado": "correcto",
+      "milisegundos": 17
+    },
+    {
+      "nombre": "Se permiten intervalos contiguos del mismo grupo",
+      "estado": "correcto",
+      "milisegundos": 15
+    },
+    {
+      "nombre": "Se permite el mismo horario en una gestión sin fechas superpuestas",
+      "estado": "correcto",
+      "milisegundos": 27
+    },
+    {
+      "nombre": "Consultar y editar horario manteniendo validez",
+      "estado": "correcto",
+      "milisegundos": 28
+    },
+    {
+      "nombre": "La gestión con horarios no permite cambiar sus fechas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "El aula debe tener capacidad suficiente",
+      "estado": "correcto",
+      "milisegundos": 18
+    },
+    {
+      "nombre": "Crear evaluación práctica con peso completo",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Crear evaluación teórica con peso completo",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Crear evaluación de otra oferta",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Los pesos no pueden superar 100 por componente",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "La nota mínima es uno",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "La nota máxima es cien",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "No se mezcla una evaluación de otra oferta",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Docente guarda una nota de su materia",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Docente no puede consultar detalle de oferta ajena",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Docente no puede registrar notas de oferta ajena",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Docente no puede abrir una planilla ajena",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Caja no puede guardar una nota",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Una sesión requiere duración positiva",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Registrar sesión de clase realizada",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Asistencia no puede superar minutos de la sesión",
+      "estado": "correcto",
+      "milisegundos": 19
+    },
+    {
+      "nombre": "Asistencia no acepta minutos negativos",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Asistencia no acepta fracciones de minuto",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Registrar asistencia de la sesión propia",
+      "estado": "correcto",
+      "milisegundos": 26
+    },
+    {
+      "nombre": "Consultar planilla de asistencia con límite de minutos",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Una planilla mixta inválida se revierte de forma atómica",
+      "estado": "correcto",
+      "milisegundos": 43
+    },
+    {
+      "nombre": "La planilla conserva filas dejadas en blanco",
+      "estado": "correcto",
+      "milisegundos": 26
+    },
+    {
+      "nombre": "No se cierra una oferta con notas pendientes",
+      "estado": "correcto",
+      "milisegundos": 22
+    },
+    {
+      "nombre": "Registrar calificación teórica pendiente",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "El cierre requiere carga igual a sesiones realizadas",
+      "estado": "correcto",
+      "milisegundos": 16
+    },
+    {
+      "nombre": "Cerrar oferta completa y calcular resultados",
+      "estado": "correcto",
+      "milisegundos": 92
+    },
+    {
+      "nombre": "El cierre bloquea modificaciones de notas",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "El cierre bloquea nuevas sesiones",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "La planilla cerrada se muestra no editable",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "La recuperación rechaza notas fuera de rango",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "La recuperación requiere resultado académico habilitado",
+      "estado": "correcto",
+      "milisegundos": 10
+    },
+    {
+      "nombre": "Recuperación aprobada registra 61 y actualiza el boletín",
+      "estado": "correcto",
+      "milisegundos": 39
+    },
+    {
+      "nombre": "No se duplica una recuperación definitiva",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Los cargos requieren importe positivo",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Caja registra cargo propio de pruebas",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Se rechaza el sobrepago",
+      "estado": "correcto",
+      "milisegundos": 7
+    },
+    {
+      "nombre": "Se rechaza pago de importe cero",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Caja registra abono con decimales y saldo exacto",
+      "estado": "correcto",
+      "milisegundos": 30
+    },
+    {
+      "nombre": "Caja liquida el saldo sin excederlo",
+      "estado": "correcto",
+      "milisegundos": 27
+    },
+    {
+      "nombre": "No se pueden seguir abonando cargos liquidados",
+      "estado": "correcto",
+      "milisegundos": 12
+    },
+    {
+      "nombre": "Los números de recibo son únicos",
+      "estado": "correcto",
+      "milisegundos": 25
+    },
+    {
+      "nombre": "Se actualiza documentación sin duplicar el documento",
+      "estado": "correcto",
+      "milisegundos": 37
+    },
+    {
+      "nombre": "Registrar y editar trámite de prueba",
+      "estado": "correcto",
+      "milisegundos": 31
+    },
+    {
+      "nombre": "La pasantía rechaza fechas invertidas",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Registrar pasantía ficticia",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Retirar horario independiente 20",
+      "estado": "correcto",
+      "milisegundos": 23
+    },
+    {
+      "nombre": "Retirar horario independiente 21",
+      "estado": "correcto",
+      "milisegundos": 15
+    },
+    {
+      "nombre": "Cerrar el grupo propio de pruebas",
+      "estado": "correcto",
+      "milisegundos": 11
+    },
+    {
+      "nombre": "Un grupo cerrado no admite inscripción en lote",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "La auditoría contiene las operaciones de comprobación",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Reporte ADMIN: matriculas.pdf",
+      "estado": "correcto",
+      "milisegundos": 124
+    },
+    {
+      "nombre": "Reporte ADMIN: matriculas.xlsx",
+      "estado": "correcto",
+      "milisegundos": 173
+    },
+    {
+      "nombre": "Reporte ADMIN: notas.pdf",
+      "estado": "correcto",
+      "milisegundos": 142
+    },
+    {
+      "nombre": "Reporte ADMIN: notas.xlsx",
+      "estado": "correcto",
+      "milisegundos": 147
+    },
+    {
+      "nombre": "Reporte ADMIN: asistencias.pdf",
+      "estado": "correcto",
+      "milisegundos": 84
+    },
+    {
+      "nombre": "Reporte ADMIN: saldos.pdf",
+      "estado": "correcto",
+      "milisegundos": 24
+    },
+    {
+      "nombre": "Reporte ADMIN: asistencias.xlsx",
+      "estado": "correcto",
+      "milisegundos": 80
+    },
+    {
+      "nombre": "Reporte ADMIN: saldos.xlsx",
+      "estado": "correcto",
+      "milisegundos": 26
+    },
+    {
+      "nombre": "Reporte ADMIN: grupos.pdf",
+      "estado": "correcto",
+      "milisegundos": 14
+    },
+    {
+      "nombre": "Reporte ADMIN: grupos.xlsx",
+      "estado": "correcto",
+      "milisegundos": 22
+    },
+    {
+      "nombre": "Reporte ADMIN: horarios.pdf",
+      "estado": "correcto",
+      "milisegundos": 28
+    },
+    {
+      "nombre": "Reporte ADMIN: horarios.xlsx",
+      "estado": "correcto",
+      "milisegundos": 34
+    },
+    {
+      "nombre": "Reporte ADMIN: boletin.xlsx",
+      "estado": "correcto",
+      "milisegundos": 55
+    },
+    {
+      "nombre": "Reporte ADMIN: boletin.pdf",
+      "estado": "correcto",
+      "milisegundos": 78
+    },
+    {
+      "nombre": "Reporte ADMIN: estudiantes.pdf",
+      "estado": "correcto",
+      "milisegundos": 312
+    },
+    {
+      "nombre": "Reporte ADMIN: docentes.pdf",
+      "estado": "correcto",
+      "milisegundos": 118
+    },
+    {
+      "nombre": "Reporte ADMIN: docentes.xlsx",
+      "estado": "correcto",
+      "milisegundos": 38
+    },
+    {
+      "nombre": "Reporte ADMIN: estudiantes.xlsx",
+      "estado": "correcto",
+      "milisegundos": 463
+    },
+    {
+      "nombre": "Reporte DOCENTE: notas.pdf",
+      "estado": "correcto",
+      "milisegundos": 31
+    },
+    {
+      "nombre": "Reporte DOCENTE: notas.xlsx",
+      "estado": "correcto",
+      "milisegundos": 49
+    },
+    {
+      "nombre": "Reporte DOCENTE: asistencias.pdf",
+      "estado": "correcto",
+      "milisegundos": 24
+    },
+    {
+      "nombre": "Reporte DOCENTE: horarios.pdf",
+      "estado": "correcto",
+      "milisegundos": 13
+    },
+    {
+      "nombre": "Reporte DOCENTE: asistencias.xlsx",
+      "estado": "correcto",
+      "milisegundos": 21
+    },
+    {
+      "nombre": "Reporte DOCENTE: horarios.xlsx",
+      "estado": "correcto",
+      "milisegundos": 25
+    },
+    {
+      "nombre": "Reporte DOCENTE: boletin.pdf",
+      "estado": "correcto",
+      "milisegundos": 69
+    },
+    {
+      "nombre": "Reporte DOCENTE: boletin.xlsx",
+      "estado": "correcto",
+      "milisegundos": 73
+    },
+    {
+      "nombre": "Reporte CAJA: saldos.pdf",
+      "estado": "correcto",
+      "milisegundos": 54
+    },
+    {
+      "nombre": "Reporte CAJA: saldos.xlsx",
+      "estado": "correcto",
+      "milisegundos": 70
+    },
+    {
+      "nombre": "Reporte CAJA: estudiantes.pdf",
+      "estado": "correcto",
+      "milisegundos": 298
+    },
+    {
+      "nombre": "Reporte CAJA: estudiantes.xlsx",
+      "estado": "correcto",
+      "milisegundos": 382
+    },
+    {
+      "nombre": "No se exporta un tipo de reporte inexistente",
+      "estado": "correcto",
+      "milisegundos": 3
+    },
+    {
+      "nombre": "No se exporta un formato inexistente",
+      "estado": "correcto",
+      "milisegundos": 5
+    },
+    {
+      "nombre": "No se exportan filtros de gestión inválidos",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Docente no exporta datos de caja",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Caja no exporta calificaciones",
+      "estado": "correcto",
+      "milisegundos": 6
+    },
+    {
+      "nombre": "Cerrar sesión DOCENTE",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Sesión DOCENTE cerrada en el cliente",
+      "estado": "correcto",
+      "milisegundos": 4
+    },
+    {
+      "nombre": "Cerrar sesión CAJA",
+      "estado": "correcto",
+      "milisegundos": 9
+    },
+    {
+      "nombre": "Sesión CAJA cerrada en el cliente",
+      "estado": "correcto",
+      "milisegundos": 2
+    },
+    {
+      "nombre": "Cerrar sesión ADMIN",
+      "estado": "correcto",
+      "milisegundos": 8
+    },
+    {
+      "nombre": "Sesión ADMIN cerrada en el cliente",
+      "estado": "correcto",
+      "milisegundos": 2
+    }
+  ]
+}

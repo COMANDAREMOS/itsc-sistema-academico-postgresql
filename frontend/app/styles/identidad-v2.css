@@ -1,0 +1,111 @@
+/* Versión 1.2: logo proporcionado por el usuario y acentos funcionales. */
+:root {
+  --esmeralda: #087c3d;
+  --menta: #e5f6eb;
+  --academico: #215d97;
+  --asistencia: #087d80;
+  --finanzas: #94620f;
+}
+body { background: radial-gradient(ellipse at 95% 0%, #dcf3e5 0, transparent 42%), #f3f7f5; }
+.institutional-logo {
+  width: 74px; height: 74px; flex-basis: 74px;
+  padding: 4px; background: #f7f7f7; border: 2px solid #d0ead7;
+  border-radius: 14px; box-shadow: 0 3px 12px #002e1926;
+}
+.sidebar { background: linear-gradient(175deg, #0d4e2b, #063b28 78%); }
+.brand { font-size: 8px; letter-spacing: .7px; }
+.brand strong { font-size: 11px; letter-spacing: .5px; }
+.sidebar .brand { gap: 9px; padding: 0 3px; }
+.workspace-label { color: #daf8e4; }
+.nav-link.active { background: #d9f6e3; color: #104e2b; box-shadow: inset 4px 0 0 #4bd084; }
+.nav-link:hover { background: #24875955; }
+.nav-link.active:hover { background: #e7faee; }
+.topbar { position: relative; border-top: 0; }
+.topbar:before {
+  content: ''; height: 4px; position: absolute; top: 0; left: 0; right: 0;
+  background: linear-gradient(90deg, #198b49 0% 60%, #159c99 60% 85%, #d2a33e 85%);
+}
+.pill { color: #0f6531; background: #dff7e7; border-color: #add7ba; }
+.welcome-banner {
+  background: linear-gradient(112deg, #073e25, #087a3b 70%, #13977c);
+  border-color: #147948; box-shadow: 0 10px 25px #0a67321a;
+  gap: 28px; padding-right: 42px;
+}
+.welcome-banner .eyebrow { color: #bdf2cc; }
+.welcome-banner p { color: #e3faeb; }
+.banner-art { width: 185px; height: 185px; flex: 0 0 185px; margin: 0; }
+.banner-art:before { width: 186px; height: 186px; border-color: #d4f5e177; }
+.banner-art .orbit { width: 215px; height: 215px; border-color: #8de7be66; }
+.banner-logo {
+  width: 158px; height: 158px; object-fit: contain; padding: 6px;
+  background: #f7f7f7; border-radius: 18px; border: 2px solid #d6eed9;
+  position: relative; z-index: 1; box-shadow: 0 12px 30px #002b2044;
+}
+.stat { border-top-width: 4px; }
+.stat:nth-child(1) { background: linear-gradient(130deg, #fff, #e5f6eb); border-top-color: #21934e; }
+.stat:nth-child(1) strong { color: #136b37; }
+.stat:nth-child(2) { background: linear-gradient(130deg, #fff, #e8f2fc); border-top-color: #367cb8; }
+.stat:nth-child(2) strong { color: #215d97; }
+.stat:nth-child(3) { background: linear-gradient(130deg, #fff, #fff4dc); border-top-color: #d0a13d; }
+.stat:nth-child(3) strong { color: #87580a; }
+.stat.accent { background: linear-gradient(125deg, #116d37, #11926a); border-top-color: #4dd598; }
+.stat.accent strong { color: #fff; }
+.quick-card { border-top-width: 3px; }
+.quick-estudiantes { background: #ecf8ef; border-color: #c8e6d2; border-top-color: #26964c; }
+.quick-notas { background: #eef5fd; border-color: #d3e2f2; border-top-color: #4c85c0; }
+.quick-asistencias { background: #eaf9f8; border-color: #c8e7e4; border-top-color: #199b98; }
+.quick-pagos { background: #fff7e9; border-color: #ecdcb7; border-top-color: #c79935; }
+.quick-notas h3, .quick-notas .quick-number { color: #215d97; }
+.quick-asistencias h3, .quick-asistencias .quick-number { color: #086a6d; }
+.quick-pagos h3, .quick-pagos .quick-number { color: #80560e; }
+.quick-notas:hover { background: #e2effd; border-color: #78a4d0; }
+.quick-asistencias:hover { background: #daf3f1; border-color: #64b9b6; }
+.quick-pagos:hover { background: #fff0d3; border-color: #cfa951; }
+.rules-card { background: linear-gradient(150deg, #e1f4e7, #effbf5); border-top: 4px solid #279e61; }
+.rule strong { color: #126a38; }
+.panel-heading h2 { color: #164e2b; }
+.button { background: linear-gradient(110deg, #176e35, #0b844d); border-color: #16723a; box-shadow: 0 3px 8px #145f2920; }
+.button:hover { background: linear-gradient(110deg, #104e27, #09683c); }
+.button.secondary { background: #fff; box-shadow: none; }
+.button.secondary:hover { background: #eaf7ef; }
+.form-panel { border-top: 3px solid #45a76e; }
+.field input:focus, .field select:focus { background: #f4fff7; outline-color: #7bc69b; }
+th { background: #ddf0e4; color: #205c37; }
+tbody tr:nth-child(even) { background: #f6faf8; }
+tbody tr:hover { background: #e7f5ed; }
+.count { background: #d5f1e1; color: #155c32; border-color: #a9d8bb; }
+.notice.ok { border-left: 4px solid #219651; }
+.notice.error { border-left: 4px solid #c65a40; }
+.login-story { background: radial-gradient(ellipse at 100% 0%, #16886c, transparent 58%), linear-gradient(145deg, #084627, #096c35); }
+.login-story .institutional-logo { width: 112px; height: 112px; flex-basis: 112px; border-radius: 18px; }
+.login-story .brand { font-size: 10px; }
+.login-story .brand strong { font-size: 15px; }
+.login-form { background: radial-gradient(ellipse at 80% 5%, #e4f5ec, transparent 55%), #fff; }
+.story-stats { border-top: 1px solid #a9e7c455; padding-top: 22px; }
+.story-stats strong { color: #d1f6d8; }
+.demo-note { color: #235f3b; }
+@media(max-width:1100px) {
+  .sidebar .institutional-logo { width: 61px; height: 61px; flex-basis: 61px; }
+  .sidebar .brand { font-size: 7px; }
+  .sidebar .brand strong { font-size: 10px; }
+  .welcome-banner { padding-right: 28px; }
+  .banner-art { width: 150px; height: 160px; flex-basis: 150px; }
+  .banner-logo { width: 135px; height: 135px; }
+}
+@media(max-width:760px) {
+  .sidebar .institutional-logo { width: 67px; height: 67px; flex-basis: 67px; }
+  .sidebar .brand { font-size: 9px; }
+  .sidebar .brand strong { font-size: 12px; }
+  .welcome-banner { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .welcome-banner p { max-width: 100%; }
+  .banner-art { position: relative; right: auto; top: auto; opacity: 1; width: 104px; height: 110px; flex-basis: 110px; align-self: flex-end; }
+  .banner-logo { width: 100px; height: 100px; border-radius: 12px; padding: 3px; }
+  .banner-art .orbit, .banner-art:before { display: none; }
+  .login-story .institutional-logo { width: 90px; height: 90px; flex-basis: 90px; }
+  .login-story .brand strong { font-size: 13px; }
+}
+@media print {
+  body { background: #fff; }
+  .panel, .stat, .welcome-banner { background: #fff; box-shadow: none; }
+  th { background: #edf5ef; }
+}

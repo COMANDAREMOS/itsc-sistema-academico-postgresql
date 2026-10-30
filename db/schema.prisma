@@ -1,0 +1,738 @@
+// Independent ITSC PostgreSQL application. All data are fictional.
+// CHECK constraints, views and trigger functions are retained in migrations.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas = ["public", "dw"]
+}
+
+model app_auditoria {
+  id Int @id(map: "app_auditoria_pkey") @default(autoincrement())
+  usuario_id Int
+  accion String @db.VarChar(60)
+  entidad String @db.VarChar(80)
+  registro_id String? @db.VarChar(50)
+  fecha DateTime @default(now()) @db.Timestamp(0)
+  rel_app_auditoria_ibfk_1 app_usuarios @relation("app_auditoria_ibfk_1", fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "app_auditoria_ibfk_1")
+  @@index([usuario_id], map: "app_auditoria_usuario_id_idx")
+  @@schema("public")
+}
+
+model app_intentos {
+  clave String @id(map: "app_intentos_pkey") @db.Char(64)
+  fallos Int @default(0)
+  ultimo DateTime @db.Timestamp(0)
+  @@schema("public")
+}
+
+model app_usuarios {
+  id Int @id(map: "app_usuarios_pkey") @default(autoincrement())
+  usuario String @db.VarChar(60)
+  nombre String @db.VarChar(120)
+  password_hash String @db.VarChar(255)
+  rol String @db.VarChar(32)
+  docente_id Int?
+  activo Int @default(1)
+  rel_app_usuarios_ibfk_1 docentes? @relation("app_usuarios_ibfk_1", fields: [docente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "app_usuarios_ibfk_1")
+  inv_app_auditoria_ibfk_1 app_auditoria[] @relation("app_auditoria_ibfk_1")
+  @@unique([usuario], map: "app_usuarios_usuario_key")
+  @@index([docente_id], map: "app_usuarios_docente_id_idx")
+  @@schema("public")
+}
+
+model asistencias_demo_historicas {
+  id Int @id(map: "asistencias_demo_historicas_pkey") @default(autoincrement())
+  inscripcion_id Int
+  fecha DateTime @db.Date
+  estado String @db.VarChar(32)
+  rel_asistencias_demo_historicas_ibfk_1 inscripciones @relation("asistencias_demo_historicas_ibfk_1", fields: [inscripcion_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "asistencias_demo_historicas_ibfk_1")
+  @@unique([inscripcion_id, fecha], map: "asistencias_demo_historicas_inscripcion_id_key")
+  @@schema("public")
+}
+
+model asistencias_sesion {
+  inscripcion_id Int
+  sesion_id Int
+  oferta_id Int
+  minutos_presentes Int
+  rel_asistencias_sesion_ibfk_1 inscripciones @relation("asistencias_sesion_ibfk_1", fields: [inscripcion_id, oferta_id], references: [id, oferta_id], onDelete: NoAction, onUpdate: NoAction, map: "asistencias_sesion_ibfk_1")
+  rel_asistencias_sesion_ibfk_2 sesiones @relation("asistencias_sesion_ibfk_2", fields: [sesion_id, oferta_id], references: [id, oferta_id], onDelete: NoAction, onUpdate: NoAction, map: "asistencias_sesion_ibfk_2")
+  @@id([inscripcion_id, sesion_id], map: "asistencias_sesion_pkey")
+  @@index([inscripcion_id, oferta_id], map: "asistencias_sesion_inscripcion_id_idx")
+  @@index([sesion_id, oferta_id], map: "asistencias_sesion_sesion_id_idx")
+  @@schema("public")
+}
+
+model aulas {
+  id Int @id(map: "aulas_pkey") @default(autoincrement())
+  codigo String @db.VarChar(20)
+  capacidad Int
+  inv_defensas_ibfk_2 defensas[] @relation("defensas_ibfk_2")
+  inv_horarios_ibfk_2 horarios[] @relation("horarios_ibfk_2")
+  @@unique([codigo], map: "aulas_codigo_key")
+  @@schema("public")
+}
+
+model calificaciones {
+  inscripcion_id Int
+  evaluacion_id Int
+  oferta_id Int
+  nota Decimal @db.Decimal(5, 2)
+  rel_calificaciones_ibfk_1 inscripciones @relation("calificaciones_ibfk_1", fields: [inscripcion_id, oferta_id], references: [id, oferta_id], onDelete: NoAction, onUpdate: NoAction, map: "calificaciones_ibfk_1")
+  rel_calificaciones_ibfk_2 evaluaciones @relation("calificaciones_ibfk_2", fields: [evaluacion_id, oferta_id], references: [id, oferta_id], onDelete: NoAction, onUpdate: NoAction, map: "calificaciones_ibfk_2")
+  @@id([inscripcion_id, evaluacion_id], map: "calificaciones_pkey")
+  @@index([inscripcion_id, oferta_id], map: "calificaciones_inscripcion_id_idx")
+  @@index([evaluacion_id, oferta_id], map: "calificaciones_evaluacion_id_idx")
+  @@schema("public")
+}
+
+model cargos {
+  id Int @id(map: "cargos_pkey") @default(autoincrement())
+  matricula_id Int
+  concepto String @db.VarChar(120)
+  monto Decimal @db.Decimal(10, 2)
+  vencimiento DateTime @db.Date
+  rel_cargos_ibfk_1 matriculas @relation("cargos_ibfk_1", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cargos_ibfk_1")
+  inv_pagos_ibfk_1 pagos[] @relation("pagos_ibfk_1")
+  @@index([matricula_id], map: "cargos_matricula_id_idx")
+  @@schema("public")
+}
+
+model carreras {
+  id Int @id(map: "carreras_pkey") @default(autoincrement())
+  codigo String @db.VarChar(20)
+  nombre String @db.VarChar(120)
+  nivel String @default("Técnico Superior") @db.VarChar(50)
+  duracion_anios Int @default(3)
+  regimen String @db.VarChar(32)
+  fuente_url String @db.VarChar(500)
+  activa Int @default(1)
+  inv_grupos_ibfk_2 grupos[] @relation("grupos_ibfk_2")
+  inv_materias_ibfk_1 materias[] @relation("materias_ibfk_1")
+  inv_matriculas_ibfk_2 matriculas[] @relation("matriculas_ibfk_2")
+  inv_planes_estudio_ibfk_1 planes_estudio[] @relation("planes_estudio_ibfk_1")
+  @@unique([codigo], map: "carreras_codigo_key")
+  @@schema("public")
+}
+
+model cierres_oferta {
+  oferta_id Int @id(map: "cierres_oferta_pkey")
+  minutos_carga Int
+  cerrado_por String @db.VarChar(120)
+  fecha DateTime @default(now()) @db.Timestamp(0)
+  rel_cierres_oferta_ibfk_1 ofertas @relation("cierres_oferta_ibfk_1", fields: [oferta_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cierres_oferta_ibfk_1")
+  @@schema("public")
+}
+
+model defensas {
+  id Int @id(map: "defensas_pkey") @default(autoincrement())
+  proyecto_id Int
+  fecha DateTime @db.Timestamp(0)
+  aula_id Int?
+  nota Decimal? @db.Decimal(5, 2)
+  acta String? @db.VarChar(50)
+  rel_defensas_ibfk_1 proyectos_graduacion @relation("defensas_ibfk_1", fields: [proyecto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "defensas_ibfk_1")
+  rel_defensas_ibfk_2 aulas? @relation("defensas_ibfk_2", fields: [aula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "defensas_ibfk_2")
+  inv_tribunales_ibfk_1 tribunales[] @relation("tribunales_ibfk_1")
+  @@unique([acta], map: "defensas_acta_key")
+  @@index([proyecto_id], map: "defensas_proyecto_id_idx")
+  @@index([aula_id], map: "defensas_aula_id_idx")
+  @@schema("public")
+}
+
+model docentes {
+  id Int @id(map: "docentes_pkey") @default(autoincrement())
+  documento String @db.VarChar(25)
+  nombres String @db.VarChar(80)
+  apellidos String @db.VarChar(100)
+  especialidad String @db.VarChar(120)
+  telefono String? @db.VarChar(25)
+  correo String? @db.VarChar(150)
+  inv_app_usuarios_ibfk_1 app_usuarios[] @relation("app_usuarios_ibfk_1")
+  inv_grupos_ibfk_3 grupos[] @relation("grupos_ibfk_3")
+  inv_ofertas_ibfk_3 ofertas[] @relation("ofertas_ibfk_3")
+  inv_pasantias_ibfk_2 pasantias[] @relation("pasantias_ibfk_2")
+  inv_proyectos_graduacion_ibfk_3 proyectos_graduacion[] @relation("proyectos_graduacion_ibfk_3")
+  inv_tribunales_ibfk_2 tribunales[] @relation("tribunales_ibfk_2")
+  @@unique([documento], map: "docentes_documento_key")
+  @@unique([correo], map: "docentes_correo_key")
+  @@schema("public")
+}
+
+model documentos_matricula {
+  id Int @id(map: "documentos_matricula_pkey") @default(autoincrement())
+  matricula_id Int
+  tipo_documento_id Int
+  estado String @default("PENDIENTE") @db.VarChar(32)
+  fecha_recepcion DateTime? @db.Date
+  observacion String? @db.VarChar(250)
+  rel_documentos_matricula_ibfk_1 matriculas @relation("documentos_matricula_ibfk_1", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "documentos_matricula_ibfk_1")
+  rel_documentos_matricula_ibfk_2 tipos_documento @relation("documentos_matricula_ibfk_2", fields: [tipo_documento_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "documentos_matricula_ibfk_2")
+  @@unique([matricula_id, tipo_documento_id], map: "documentos_matricula_matricula_id_key")
+  @@index([tipo_documento_id], map: "documentos_matricula_tipo_documento_id_idx")
+  @@schema("public")
+}
+
+model estudiantes {
+  id Int @id(map: "estudiantes_pkey") @default(autoincrement())
+  registro String @db.VarChar(20)
+  documento String @db.VarChar(25)
+  nombres String @db.VarChar(80)
+  apellidos String @db.VarChar(100)
+  fecha_nacimiento DateTime @db.Date
+  telefono String? @db.VarChar(25)
+  correo String? @db.VarChar(150)
+  direccion String? @db.VarChar(200)
+  fecha_registro DateTime @default(now()) @db.Timestamp(0)
+  inv_matriculas_ibfk_1 matriculas[] @relation("matriculas_ibfk_1")
+  @@unique([registro], map: "estudiantes_registro_key")
+  @@unique([documento], map: "estudiantes_documento_key")
+  @@unique([correo], map: "estudiantes_correo_key")
+  @@schema("public")
+}
+
+model evaluaciones {
+  id Int @id(map: "evaluaciones_pkey") @default(autoincrement())
+  oferta_id Int
+  nombre String @db.VarChar(100)
+  componente String @db.VarChar(32)
+  peso Decimal @db.Decimal(6, 3)
+  rel_evaluaciones_ibfk_1 ofertas @relation("evaluaciones_ibfk_1", fields: [oferta_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "evaluaciones_ibfk_1")
+  inv_calificaciones_ibfk_2 calificaciones[] @relation("calificaciones_ibfk_2")
+  @@unique([oferta_id, nombre], map: "evaluaciones_oferta_id_key")
+  @@unique([id, oferta_id], map: "evaluaciones_id_key")
+  @@schema("public")
+}
+
+model excepciones_asistencia {
+  inscripcion_id Int @id(map: "excepciones_asistencia_pkey")
+  documento String @db.VarChar(250)
+  resolucion String @db.VarChar(100)
+  aprobada_por String @db.VarChar(120)
+  fecha DateTime @db.Date
+  rel_excepciones_asistencia_ibfk_1 inscripciones @relation("excepciones_asistencia_ibfk_1", fields: [inscripcion_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "excepciones_asistencia_ibfk_1")
+  @@schema("public")
+}
+
+model grupo_integrantes {
+  id Int @id(map: "grupo_integrantes_pkey") @default(autoincrement())
+  grupo_id Int
+  matricula_id Int
+  fecha DateTime @default(now()) @db.Timestamp(0)
+  rel_grupo_integrantes_ibfk_1 grupos @relation("grupo_integrantes_ibfk_1", fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_integrantes_ibfk_1")
+  rel_grupo_integrantes_ibfk_2 matriculas @relation("grupo_integrantes_ibfk_2", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_integrantes_ibfk_2")
+  @@unique([matricula_id], map: "grupo_integrantes_matricula_id_key")
+  @@index([grupo_id], map: "grupo_integrantes_grupo_id_idx")
+  @@schema("public")
+}
+
+model grupo_materias {
+  id Int @id(map: "grupo_materias_pkey") @default(autoincrement())
+  grupo_id Int
+  oferta_id Int
+  rel_grupo_materias_ibfk_1 grupos @relation("grupo_materias_ibfk_1", fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_materias_ibfk_1")
+  rel_grupo_materias_ibfk_2 ofertas @relation("grupo_materias_ibfk_2", fields: [oferta_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_materias_ibfk_2")
+  @@unique([oferta_id], map: "grupo_materias_oferta_id_key")
+  @@index([grupo_id], map: "grupo_materias_grupo_id_idx")
+  @@schema("public")
+}
+
+model grupos {
+  id Int @id(map: "grupos_pkey") @default(autoincrement())
+  periodo_id Int
+  carrera_id Int
+  curso Int
+  paralelo String @db.VarChar(20)
+  turno String @db.VarChar(32)
+  cupo Int
+  tutor_id Int?
+  estado String @default("ACTIVO") @db.VarChar(32)
+  rel_grupos_ibfk_1 periodos @relation("grupos_ibfk_1", fields: [periodo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupos_ibfk_1")
+  rel_grupos_ibfk_2 carreras @relation("grupos_ibfk_2", fields: [carrera_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupos_ibfk_2")
+  rel_grupos_ibfk_3 docentes? @relation("grupos_ibfk_3", fields: [tutor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupos_ibfk_3")
+  inv_grupo_integrantes_ibfk_1 grupo_integrantes[] @relation("grupo_integrantes_ibfk_1")
+  inv_grupo_materias_ibfk_1 grupo_materias[] @relation("grupo_materias_ibfk_1")
+  @@unique([periodo_id, carrera_id, curso, paralelo, turno], map: "grupos_uq_grupo_key")
+  @@index([carrera_id], map: "grupos_carrera_id_idx")
+  @@index([tutor_id], map: "grupos_tutor_id_idx")
+  @@schema("public")
+}
+
+model horarios {
+  id Int @id(map: "horarios_pkey") @default(autoincrement())
+  oferta_id Int
+  aula_id Int
+  dia Int
+  hora_inicio DateTime @db.Time(0)
+  hora_fin DateTime @db.Time(0)
+  rel_horarios_ibfk_1 ofertas @relation("horarios_ibfk_1", fields: [oferta_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "horarios_ibfk_1")
+  rel_horarios_ibfk_2 aulas @relation("horarios_ibfk_2", fields: [aula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "horarios_ibfk_2")
+  @@index([oferta_id], map: "horarios_oferta_id_idx")
+  @@index([aula_id], map: "horarios_aula_id_idx")
+  @@schema("public")
+}
+
+model inscripciones {
+  id Int @id(map: "inscripciones_pkey") @default(autoincrement())
+  matricula_id Int
+  oferta_id Int
+  carrera_id Int
+  periodo_id Int
+  fecha DateTime @db.Date
+  estado String @default("ACTIVA") @db.VarChar(32)
+  rel_inscripciones_ibfk_1 matriculas @relation("inscripciones_ibfk_1", fields: [matricula_id, carrera_id, periodo_id], references: [id, carrera_id, periodo_id], onDelete: NoAction, onUpdate: NoAction, map: "inscripciones_ibfk_1")
+  rel_inscripciones_ibfk_2 ofertas @relation("inscripciones_ibfk_2", fields: [oferta_id, carrera_id, periodo_id], references: [id, carrera_id, periodo_id], onDelete: NoAction, onUpdate: NoAction, map: "inscripciones_ibfk_2")
+  inv_asistencias_demo_historicas_ibfk_1 asistencias_demo_historicas[] @relation("asistencias_demo_historicas_ibfk_1")
+  inv_asistencias_sesion_ibfk_1 asistencias_sesion[] @relation("asistencias_sesion_ibfk_1")
+  inv_calificaciones_ibfk_1 calificaciones[] @relation("calificaciones_ibfk_1")
+  inv_excepciones_asistencia_ibfk_1 excepciones_asistencia? @relation("excepciones_asistencia_ibfk_1")
+  inv_notas_demo_historicas_ibfk_1 notas_demo_historicas[] @relation("notas_demo_historicas_ibfk_1")
+  inv_resultados_finales_ibfk_1 resultados_finales? @relation("resultados_finales_ibfk_1")
+  @@unique([matricula_id, oferta_id], map: "inscripciones_matricula_id_key")
+  @@unique([id, oferta_id], map: "inscripciones_id_key")
+  @@index([matricula_id, carrera_id, periodo_id], map: "inscripciones_matricula_id_2_idx")
+  @@index([oferta_id, carrera_id, periodo_id], map: "inscripciones_oferta_id_idx")
+  @@schema("public")
+}
+
+model materias {
+  id Int @id(map: "materias_pkey") @default(autoincrement())
+  carrera_id Int
+  codigo String @db.VarChar(20)
+  nombre String @db.VarChar(120)
+  nivel_curso Int
+  horas_semanales Int?
+  fuente_url String @db.VarChar(500)
+  rel_materias_ibfk_1 carreras @relation("materias_ibfk_1", fields: [carrera_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "materias_ibfk_1")
+  inv_ofertas_ibfk_1 ofertas[] @relation("ofertas_ibfk_1")
+  inv_plan_materias_ibfk_2 plan_materias[] @relation("plan_materias_ibfk_2")
+  @@unique([carrera_id, codigo], map: "materias_carrera_id_key")
+  @@unique([id, carrera_id], map: "materias_id_key")
+  @@schema("public")
+}
+
+model matriculas {
+  id Int @id(map: "matriculas_pkey") @default(autoincrement())
+  estudiante_id Int
+  carrera_id Int
+  periodo_id Int
+  fecha DateTime @db.Date
+  estado String @default("ACTIVA") @db.VarChar(32)
+  plan_id Int
+  rel_matriculas_ibfk_1 estudiantes @relation("matriculas_ibfk_1", fields: [estudiante_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "matriculas_ibfk_1")
+  rel_matriculas_ibfk_2 carreras @relation("matriculas_ibfk_2", fields: [carrera_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "matriculas_ibfk_2")
+  rel_matriculas_ibfk_3 periodos @relation("matriculas_ibfk_3", fields: [periodo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "matriculas_ibfk_3")
+  rel_matriculas_ibfk_4 planes_estudio @relation("matriculas_ibfk_4", fields: [plan_id, carrera_id], references: [id, carrera_id], onDelete: NoAction, onUpdate: NoAction, map: "matriculas_ibfk_4")
+  inv_cargos_ibfk_1 cargos[] @relation("cargos_ibfk_1")
+  inv_documentos_matricula_ibfk_1 documentos_matricula[] @relation("documentos_matricula_ibfk_1")
+  inv_grupo_integrantes_ibfk_2 grupo_integrantes? @relation("grupo_integrantes_ibfk_2")
+  inv_inscripciones_ibfk_1 inscripciones[] @relation("inscripciones_ibfk_1")
+  inv_pasantias_ibfk_1 pasantias[] @relation("pasantias_ibfk_1")
+  inv_proyectos_graduacion_ibfk_1 proyectos_graduacion[] @relation("proyectos_graduacion_ibfk_1")
+  inv_recuperaciones_ibfk_2 recuperaciones[] @relation("recuperaciones_ibfk_2")
+  inv_tramites_ibfk_1 tramites[] @relation("tramites_ibfk_1")
+  @@unique([estudiante_id, carrera_id, periodo_id], map: "matriculas_estudiante_id_key")
+  @@unique([id, carrera_id, periodo_id], map: "matriculas_id_key")
+  @@index([carrera_id], map: "matriculas_carrera_id_idx")
+  @@index([periodo_id], map: "matriculas_periodo_id_idx")
+  @@index([plan_id, carrera_id], map: "matriculas_plan_id_idx")
+  @@schema("public")
+}
+
+model modalidades_graduacion {
+  id Int @id(map: "modalidades_graduacion_pkey") @default(autoincrement())
+  nombre String @db.VarChar(120)
+  inv_proyectos_graduacion_ibfk_2 proyectos_graduacion[] @relation("proyectos_graduacion_ibfk_2")
+  @@unique([nombre], map: "modalidades_graduacion_nombre_key")
+  @@schema("public")
+}
+
+model notas_demo_historicas {
+  id Int @id(map: "notas_demo_historicas_pkey") @default(autoincrement())
+  inscripcion_id Int
+  evaluacion String @db.VarChar(80)
+  nota Decimal @db.Decimal(5, 2)
+  fecha DateTime @db.Date
+  rel_notas_demo_historicas_ibfk_1 inscripciones @relation("notas_demo_historicas_ibfk_1", fields: [inscripcion_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "notas_demo_historicas_ibfk_1")
+  @@unique([inscripcion_id, evaluacion], map: "notas_demo_historicas_inscripcion_id_key")
+  @@schema("public")
+}
+
+model ofertas {
+  id Int @id(map: "ofertas_pkey") @default(autoincrement())
+  materia_id Int
+  carrera_id Int
+  periodo_id Int
+  docente_id Int
+  paralelo String @db.VarChar(10)
+  turno String @db.VarChar(32)
+  cupo Int
+  rel_ofertas_ibfk_1 materias @relation("ofertas_ibfk_1", fields: [materia_id, carrera_id], references: [id, carrera_id], onDelete: NoAction, onUpdate: NoAction, map: "ofertas_ibfk_1")
+  rel_ofertas_ibfk_2 periodos @relation("ofertas_ibfk_2", fields: [periodo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ofertas_ibfk_2")
+  rel_ofertas_ibfk_3 docentes @relation("ofertas_ibfk_3", fields: [docente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ofertas_ibfk_3")
+  inv_cierres_oferta_ibfk_1 cierres_oferta? @relation("cierres_oferta_ibfk_1")
+  inv_evaluaciones_ibfk_1 evaluaciones[] @relation("evaluaciones_ibfk_1")
+  inv_grupo_materias_ibfk_2 grupo_materias? @relation("grupo_materias_ibfk_2")
+  inv_horarios_ibfk_1 horarios[] @relation("horarios_ibfk_1")
+  inv_inscripciones_ibfk_2 inscripciones[] @relation("inscripciones_ibfk_2")
+  inv_sesiones_ibfk_1 sesiones[] @relation("sesiones_ibfk_1")
+  @@unique([materia_id, periodo_id, paralelo], map: "ofertas_materia_id_key")
+  @@unique([id, carrera_id, periodo_id], map: "ofertas_id_key")
+  @@index([materia_id, carrera_id], map: "ofertas_materia_id_2_idx")
+  @@index([periodo_id], map: "ofertas_periodo_id_idx")
+  @@index([docente_id], map: "ofertas_docente_id_idx")
+  @@schema("public")
+}
+
+model pagos {
+  id Int @id(map: "pagos_pkey") @default(autoincrement())
+  cargo_id Int
+  recibo String @db.VarChar(30)
+  fecha DateTime @db.Date
+  monto Decimal @db.Decimal(10, 2)
+  metodo String @db.VarChar(32)
+  rel_pagos_ibfk_1 cargos @relation("pagos_ibfk_1", fields: [cargo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pagos_ibfk_1")
+  @@unique([recibo], map: "pagos_recibo_key")
+  @@index([cargo_id], map: "pagos_cargo_id_idx")
+  @@schema("public")
+}
+
+model pasantias {
+  id Int @id(map: "pasantias_pkey") @default(autoincrement())
+  matricula_id Int
+  tutor_id Int?
+  empresa String @db.VarChar(150)
+  fecha_inicio DateTime @db.Date
+  fecha_fin DateTime? @db.Date
+  horas Int?
+  estado String @db.VarChar(32)
+  rel_pasantias_ibfk_1 matriculas @relation("pasantias_ibfk_1", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pasantias_ibfk_1")
+  rel_pasantias_ibfk_2 docentes? @relation("pasantias_ibfk_2", fields: [tutor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pasantias_ibfk_2")
+  @@index([matricula_id], map: "pasantias_matricula_id_idx")
+  @@index([tutor_id], map: "pasantias_tutor_id_idx")
+  @@schema("public")
+}
+
+model periodos {
+  id Int @id(map: "periodos_pkey") @default(autoincrement())
+  nombre String @db.VarChar(30)
+  fecha_inicio DateTime @db.Date
+  fecha_fin DateTime @db.Date
+  inv_grupos_ibfk_1 grupos[] @relation("grupos_ibfk_1")
+  inv_matriculas_ibfk_3 matriculas[] @relation("matriculas_ibfk_3")
+  inv_ofertas_ibfk_2 ofertas[] @relation("ofertas_ibfk_2")
+  @@unique([nombre], map: "periodos_nombre_key")
+  @@schema("public")
+}
+
+model plan_materias {
+  plan_id Int
+  materia_id Int
+  carrera_id Int
+  rel_plan_materias_ibfk_1 planes_estudio @relation("plan_materias_ibfk_1", fields: [plan_id, carrera_id], references: [id, carrera_id], onDelete: NoAction, onUpdate: NoAction, map: "plan_materias_ibfk_1")
+  rel_plan_materias_ibfk_2 materias @relation("plan_materias_ibfk_2", fields: [materia_id, carrera_id], references: [id, carrera_id], onDelete: NoAction, onUpdate: NoAction, map: "plan_materias_ibfk_2")
+  inv_prerrequisitos_ibfk_1 prerrequisitos[] @relation("prerrequisitos_ibfk_1")
+  inv_prerrequisitos_ibfk_2 prerrequisitos[] @relation("prerrequisitos_ibfk_2")
+  @@id([plan_id, materia_id], map: "plan_materias_pkey")
+  @@index([plan_id, carrera_id], map: "plan_materias_plan_id_idx")
+  @@index([materia_id, carrera_id], map: "plan_materias_materia_id_idx")
+  @@schema("public")
+}
+
+model planes_estudio {
+  id Int @id(map: "planes_estudio_pkey") @default(autoincrement())
+  carrera_id Int
+  denominacion String @db.VarChar(100)
+  cohorte String @db.VarChar(30)
+  regla_id Int
+  rel_planes_estudio_ibfk_1 carreras @relation("planes_estudio_ibfk_1", fields: [carrera_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "planes_estudio_ibfk_1")
+  rel_planes_estudio_ibfk_2 reglas_evaluacion @relation("planes_estudio_ibfk_2", fields: [regla_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "planes_estudio_ibfk_2")
+  inv_matriculas_ibfk_4 matriculas[] @relation("matriculas_ibfk_4")
+  inv_plan_materias_ibfk_1 plan_materias[] @relation("plan_materias_ibfk_1")
+  @@unique([id, carrera_id], map: "planes_estudio_id_key")
+  @@unique([carrera_id, denominacion, cohorte], map: "planes_estudio_carrera_id_key")
+  @@index([regla_id], map: "planes_estudio_regla_id_idx")
+  @@schema("public")
+}
+
+model prerrequisitos {
+  plan_id Int
+  materia_id Int
+  requerida_id Int
+  rel_prerrequisitos_ibfk_1 plan_materias @relation("prerrequisitos_ibfk_1", fields: [plan_id, materia_id], references: [plan_id, materia_id], onDelete: NoAction, onUpdate: NoAction, map: "prerrequisitos_ibfk_1")
+  rel_prerrequisitos_ibfk_2 plan_materias @relation("prerrequisitos_ibfk_2", fields: [plan_id, requerida_id], references: [plan_id, materia_id], onDelete: NoAction, onUpdate: NoAction, map: "prerrequisitos_ibfk_2")
+  @@id([plan_id, materia_id, requerida_id], map: "prerrequisitos_pkey")
+  @@index([plan_id, requerida_id], map: "prerrequisitos_plan_id_idx")
+  @@schema("public")
+}
+
+model proyectos_graduacion {
+  id Int @id(map: "proyectos_graduacion_pkey") @default(autoincrement())
+  matricula_id Int
+  modalidad_id Int
+  tutor_id Int?
+  titulo String @db.VarChar(250)
+  estado String @db.VarChar(32)
+  rel_proyectos_graduacion_ibfk_1 matriculas @relation("proyectos_graduacion_ibfk_1", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "proyectos_graduacion_ibfk_1")
+  rel_proyectos_graduacion_ibfk_2 modalidades_graduacion @relation("proyectos_graduacion_ibfk_2", fields: [modalidad_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "proyectos_graduacion_ibfk_2")
+  rel_proyectos_graduacion_ibfk_3 docentes? @relation("proyectos_graduacion_ibfk_3", fields: [tutor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "proyectos_graduacion_ibfk_3")
+  inv_defensas_ibfk_1 defensas[] @relation("defensas_ibfk_1")
+  @@index([matricula_id], map: "proyectos_graduacion_matricula_id_idx")
+  @@index([modalidad_id], map: "proyectos_graduacion_modalidad_id_idx")
+  @@index([tutor_id], map: "proyectos_graduacion_tutor_id_idx")
+  @@schema("public")
+}
+
+model recuperaciones {
+  inscripcion_id Int @id(map: "recuperaciones_pkey")
+  matricula_id Int
+  nota_prueba Decimal @db.Decimal(5, 2)
+  nota_registrada Decimal @db.Decimal(5, 2)
+  fecha DateTime @db.Date
+  rel_recuperaciones_ibfk_1 resultados_finales @relation("recuperaciones_ibfk_1", fields: [inscripcion_id], references: [inscripcion_id], onDelete: NoAction, onUpdate: NoAction, map: "recuperaciones_ibfk_1")
+  rel_recuperaciones_ibfk_2 matriculas @relation("recuperaciones_ibfk_2", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recuperaciones_ibfk_2")
+  @@index([matricula_id], map: "recuperaciones_matricula_id_idx")
+  @@schema("public")
+}
+
+model reglas_evaluacion {
+  id Int @id(map: "reglas_evaluacion_pkey")
+  nombre String @db.VarChar(120)
+  fuente String @db.VarChar(500)
+  minimo Decimal @default(1.00) @db.Decimal(5, 2)
+  maximo Decimal @default(100.00) @db.Decimal(5, 2)
+  aprobacion Decimal @default(61.00) @db.Decimal(5, 2)
+  practica Decimal @default(0.700) @db.Decimal(4, 3)
+  teoria Decimal @default(0.300) @db.Decimal(4, 3)
+  asistencia Decimal @default(80.00) @db.Decimal(5, 2)
+  acceso_recuperacion Decimal @default(40.00) @db.Decimal(5, 2)
+  max_rec_anual Int @default(3)
+  max_rec_semestral Int @default(2)
+  inv_planes_estudio_ibfk_2 planes_estudio[] @relation("planes_estudio_ibfk_2")
+  inv_resultados_finales_ibfk_2 resultados_finales[] @relation("resultados_finales_ibfk_2")
+  @@schema("public")
+}
+
+model resultados_finales {
+  inscripcion_id Int @id(map: "resultados_finales_pkey")
+  regla_id Int
+  promedio Decimal @db.Decimal(8, 5)
+  porcentaje_asistencia Decimal @db.Decimal(8, 5)
+  excepcion_documentada Int
+  estado String @db.VarChar(32)
+  fecha DateTime @default(now()) @db.Timestamp(0)
+  rel_resultados_finales_ibfk_1 inscripciones @relation("resultados_finales_ibfk_1", fields: [inscripcion_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "resultados_finales_ibfk_1")
+  rel_resultados_finales_ibfk_2 reglas_evaluacion @relation("resultados_finales_ibfk_2", fields: [regla_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "resultados_finales_ibfk_2")
+  inv_recuperaciones_ibfk_1 recuperaciones? @relation("recuperaciones_ibfk_1")
+  @@index([regla_id], map: "resultados_finales_regla_id_idx")
+  @@schema("public")
+}
+
+model sesiones {
+  id Int @id(map: "sesiones_pkey") @default(autoincrement())
+  oferta_id Int
+  inicio DateTime @db.Timestamp(0)
+  fin DateTime @db.Timestamp(0)
+  estado String @default("PROGRAMADA") @db.VarChar(32)
+  rel_sesiones_ibfk_1 ofertas @relation("sesiones_ibfk_1", fields: [oferta_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sesiones_ibfk_1")
+  inv_asistencias_sesion_ibfk_2 asistencias_sesion[] @relation("asistencias_sesion_ibfk_2")
+  @@unique([id, oferta_id], map: "sesiones_id_key")
+  @@unique([oferta_id, inicio], map: "sesiones_oferta_id_key")
+  @@schema("public")
+}
+
+model tipos_documento {
+  id Int @id(map: "tipos_documento_pkey") @default(autoincrement())
+  nombre String @db.VarChar(100)
+  inv_documentos_matricula_ibfk_2 documentos_matricula[] @relation("documentos_matricula_ibfk_2")
+  @@unique([nombre], map: "tipos_documento_nombre_key")
+  @@schema("public")
+}
+
+model tramites {
+  id Int @id(map: "tramites_pkey") @default(autoincrement())
+  matricula_id Int
+  tipo String @db.VarChar(32)
+  fecha DateTime @db.Date
+  estado String @db.VarChar(32)
+  detalle String? @db.Text
+  rel_tramites_ibfk_1 matriculas @relation("tramites_ibfk_1", fields: [matricula_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tramites_ibfk_1")
+  @@index([matricula_id], map: "tramites_matricula_id_idx")
+  @@schema("public")
+}
+
+model tribunales {
+  defensa_id Int
+  docente_id Int
+  funcion String @db.VarChar(50)
+  rel_tribunales_ibfk_1 defensas @relation("tribunales_ibfk_1", fields: [defensa_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tribunales_ibfk_1")
+  rel_tribunales_ibfk_2 docentes @relation("tribunales_ibfk_2", fields: [docente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tribunales_ibfk_2")
+  @@id([defensa_id, docente_id], map: "tribunales_pkey")
+  @@index([docente_id], map: "tribunales_docente_id_idx")
+  @@schema("public")
+}
+
+model dw_dim_gestion {
+  gestion_id Int @id
+  nombre String @db.VarChar(30)
+  fecha_inicio DateTime @db.Date
+  fecha_fin DateTime @db.Date
+  matriculas dw_fact_matriculas[]
+  resultados dw_fact_resultados[]
+  pagos dw_fact_pagos[]
+  @@map("dim_gestion")
+  @@schema("dw")
+}
+
+model dw_dim_carrera {
+  carrera_id Int @id
+  codigo String @db.VarChar(20)
+  nombre String @db.VarChar(120)
+  nivel String @db.VarChar(50)
+  regimen String @db.VarChar(32)
+  materias dw_dim_materia[]
+  matriculas dw_fact_matriculas[]
+  resultados dw_fact_resultados[]
+  pagos dw_fact_pagos[]
+  @@map("dim_carrera")
+  @@schema("dw")
+}
+
+model dw_dim_estudiante {
+  estudiante_id Int @id
+  registro String @db.VarChar(20)
+  nombres String @db.VarChar(80)
+  apellidos String @db.VarChar(100)
+  matriculas dw_fact_matriculas[]
+  resultados dw_fact_resultados[]
+  pagos dw_fact_pagos[]
+  @@map("dim_estudiante")
+  @@schema("dw")
+}
+
+model dw_dim_docente {
+  docente_id Int @id
+  nombres String @db.VarChar(80)
+  apellidos String @db.VarChar(100)
+  especialidad String @db.VarChar(120)
+  resultados dw_fact_resultados[]
+  @@map("dim_docente")
+  @@schema("dw")
+}
+
+model dw_dim_materia {
+  materia_id Int @id
+  carrera_id Int
+  codigo String @db.VarChar(20)
+  nombre String @db.VarChar(120)
+  nivel_curso Int
+  carrera dw_dim_carrera @relation(fields:[carrera_id], references:[carrera_id], onDelete:NoAction, onUpdate:NoAction)
+  resultados dw_fact_resultados[]
+  @@index([carrera_id], map:"dim_materia_carrera_idx")
+  @@map("dim_materia")
+  @@schema("dw")
+}
+
+model dw_dim_tiempo {
+  fecha DateTime @id @db.Date
+  anio Int
+  mes Int
+  dia Int
+  trimestre Int
+  dia_semana Int
+  mes_nombre String @db.VarChar(20)
+  matriculas dw_fact_matriculas[]
+  resultados dw_fact_resultados[]
+  pagos dw_fact_pagos[]
+  @@map("dim_tiempo")
+  @@schema("dw")
+}
+
+model dw_fact_matriculas {
+  matricula_id Int @id
+  gestion_id Int
+  carrera_id Int
+  estudiante_id Int
+  fecha DateTime @db.Date
+  estado String @db.VarChar(32)
+  cantidad Int @default(1)
+  gestion dw_dim_gestion @relation(fields:[gestion_id], references:[gestion_id], onDelete:NoAction, onUpdate:NoAction)
+  carrera dw_dim_carrera @relation(fields:[carrera_id], references:[carrera_id], onDelete:NoAction, onUpdate:NoAction)
+  estudiante dw_dim_estudiante @relation(fields:[estudiante_id], references:[estudiante_id], onDelete:NoAction, onUpdate:NoAction)
+  tiempo dw_dim_tiempo @relation(fields:[fecha], references:[fecha], onDelete:NoAction, onUpdate:NoAction)
+  @@index([gestion_id,carrera_id], map:"fact_matriculas_gestion_carrera_idx")
+  @@index([estudiante_id], map:"fact_matriculas_estudiante_idx")
+  @@index([fecha], map:"fact_matriculas_fecha_idx")
+  @@map("fact_matriculas")
+  @@schema("dw")
+}
+
+model dw_fact_resultados {
+  inscripcion_id Int @id
+  matricula_id Int
+  gestion_id Int
+  carrera_id Int
+  estudiante_id Int
+  docente_id Int
+  materia_id Int
+  fecha DateTime @db.Date
+  promedio Decimal @db.Decimal(8,5)
+  asistencia Decimal @db.Decimal(8,5)
+  nota_final Decimal @db.Decimal(8,5)
+  resultado String @db.VarChar(32)
+  aprobado Int
+  recuperacion Int
+  gestion dw_dim_gestion @relation(fields:[gestion_id], references:[gestion_id], onDelete:NoAction, onUpdate:NoAction)
+  carrera dw_dim_carrera @relation(fields:[carrera_id], references:[carrera_id], onDelete:NoAction, onUpdate:NoAction)
+  estudiante dw_dim_estudiante @relation(fields:[estudiante_id], references:[estudiante_id], onDelete:NoAction, onUpdate:NoAction)
+  docente dw_dim_docente @relation(fields:[docente_id], references:[docente_id], onDelete:NoAction, onUpdate:NoAction)
+  materia dw_dim_materia @relation(fields:[materia_id], references:[materia_id], onDelete:NoAction, onUpdate:NoAction)
+  tiempo dw_dim_tiempo @relation(fields:[fecha], references:[fecha], onDelete:NoAction, onUpdate:NoAction)
+  @@index([gestion_id,carrera_id], map:"fact_resultados_gestion_carrera_idx")
+  @@index([materia_id], map:"fact_resultados_materia_idx")
+  @@index([docente_id], map:"fact_resultados_docente_idx")
+  @@index([estudiante_id], map:"fact_resultados_estudiante_idx")
+  @@index([fecha], map:"fact_resultados_fecha_idx")
+  @@map("fact_resultados")
+  @@schema("dw")
+}
+
+model dw_fact_pagos {
+  pago_id Int @id
+  matricula_id Int
+  cargo_id Int
+  gestion_id Int
+  carrera_id Int
+  estudiante_id Int
+  fecha DateTime @db.Date
+  monto Decimal @db.Decimal(10,2)
+  metodo String @db.VarChar(32)
+  recibo String @db.VarChar(30)
+  gestion dw_dim_gestion @relation(fields:[gestion_id], references:[gestion_id], onDelete:NoAction, onUpdate:NoAction)
+  carrera dw_dim_carrera @relation(fields:[carrera_id], references:[carrera_id], onDelete:NoAction, onUpdate:NoAction)
+  estudiante dw_dim_estudiante @relation(fields:[estudiante_id], references:[estudiante_id], onDelete:NoAction, onUpdate:NoAction)
+  tiempo dw_dim_tiempo @relation(fields:[fecha], references:[fecha], onDelete:NoAction, onUpdate:NoAction)
+  @@index([gestion_id,carrera_id], map:"fact_pagos_gestion_carrera_idx")
+  @@index([fecha], map:"fact_pagos_fecha_idx")
+  @@index([estudiante_id], map:"fact_pagos_estudiante_idx")
+  @@map("fact_pagos")
+  @@schema("dw")
+}
+
+model dw_etl_ejecuciones {
+  id Int @id @default(autoincrement())
+  inicio DateTime @default(now()) @db.Timestamp(3)
+  fin DateTime? @db.Timestamp(3)
+  estado String @default("EN_CURSO") @db.VarChar(32)
+  dimensiones Int @default(0)
+  matriculas Int @default(0)
+  resultados Int @default(0)
+  pagos Int @default(0)
+  detalle Json @default("{}")
+  @@index([inicio], map:"etl_ejecuciones_inicio_idx")
+  @@map("etl_ejecuciones")
+  @@schema("dw")
+}

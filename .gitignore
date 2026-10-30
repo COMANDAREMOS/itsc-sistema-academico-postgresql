@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.local/
+backups/
+entrega/
+backend/dist/
+frontend/.next/
+*.tsbuildinfo
+*.log
+*.dump
+*.zip
+docs/proyecto-anterior-huellas.json

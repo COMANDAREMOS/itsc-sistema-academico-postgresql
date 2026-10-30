@@ -1,0 +1,4534 @@
+{
+  "app_auditoria": {
+    "name": "app_auditoria",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "bigint(20)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "usuario_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "accion",
+        "raw_type": "varchar(60)",
+        "sql_type": "varchar(60)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(60)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "entidad",
+        "raw_type": "varchar(80)",
+        "sql_type": "varchar(80)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(80)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "registro_id",
+        "raw_type": "varchar(50)",
+        "sql_type": "varchar(50)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(50)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "timestamp",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": "current_timestamp()",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "app_auditoria_usuario_id_idx",
+        [
+          "usuario_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "app_auditoria_ibfk_1",
+        "local": [
+          "usuario_id"
+        ],
+        "target": "app_usuarios",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "app_auditoria_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "app_auditoria_usuario_id_nonnegative",
+        "`usuario_id` >= 0"
+      ]
+    ]
+  },
+  "app_intentos": {
+    "name": "app_intentos",
+    "fields": [
+      {
+        "name": "clave",
+        "raw_type": "char(64)",
+        "sql_type": "char(64)",
+        "prisma_type": "String",
+        "native": "@db.Char(64)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fallos",
+        "raw_type": "int(11)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": "0",
+        "auto": false
+      },
+      {
+        "name": "ultimo",
+        "raw_type": "datetime",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "clave"
+    ],
+    "uniques": [],
+    "indexes": [],
+    "fks": [],
+    "checks": []
+  },
+  "app_usuarios": {
+    "name": "app_usuarios",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "usuario",
+        "raw_type": "varchar(60)",
+        "sql_type": "varchar(60)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(60)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "password_hash",
+        "raw_type": "varchar(255)",
+        "sql_type": "varchar(255)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(255)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "rol",
+        "raw_type": "enum('ADMIN','DOCENTE','CAJA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "ADMIN",
+          "DOCENTE",
+          "CAJA"
+        ]
+      },
+      {
+        "name": "docente_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "activo",
+        "raw_type": "tinyint(1)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": "1",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "app_usuarios_usuario_key",
+        [
+          "usuario"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "app_usuarios_docente_id_idx",
+        [
+          "docente_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "app_usuarios_ibfk_1",
+        "local": [
+          "docente_id"
+        ],
+        "target": "docentes",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "app_usuarios_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "app_usuarios_rol_enum",
+        "`rol` IN ('ADMIN', 'DOCENTE', 'CAJA')"
+      ],
+      [
+        "app_usuarios_docente_id_nonnegative",
+        "`docente_id` >= 0"
+      ],
+      [
+        "app_usuarios_activo_boolean",
+        "`activo` IN (0,1)"
+      ],
+      [
+        "app_usuarios_CONSTRAINT_1",
+        "`rol` <> 'DOCENTE' or `docente_id` is not null"
+      ]
+    ]
+  },
+  "asistencias_demo_historicas": {
+    "name": "asistencias_demo_historicas",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('PRESENTE','FALTA','ATRASO','JUSTIFICADA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "PRESENTE",
+          "FALTA",
+          "ATRASO",
+          "JUSTIFICADA"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "asistencias_demo_historicas_inscripcion_id_key",
+        [
+          "inscripcion_id",
+          "fecha"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "asistencias_demo_historicas_ibfk_1",
+        "local": [
+          "inscripcion_id"
+        ],
+        "target": "inscripciones",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "asistencias_demo_historicas_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "asistencias_demo_historicas_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "asistencias_demo_historicas_estado_enum",
+        "`estado` IN ('PRESENTE', 'FALTA', 'ATRASO', 'JUSTIFICADA')"
+      ]
+    ]
+  },
+  "asistencias_sesion": {
+    "name": "asistencias_sesion",
+    "fields": [
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "sesion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "minutos_presentes",
+        "raw_type": "smallint(5)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "inscripcion_id",
+      "sesion_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "asistencias_sesion_inscripcion_id_idx",
+        [
+          "inscripcion_id",
+          "oferta_id"
+        ]
+      ],
+      [
+        "asistencias_sesion_sesion_id_idx",
+        [
+          "sesion_id",
+          "oferta_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "asistencias_sesion_ibfk_1",
+        "local": [
+          "inscripcion_id",
+          "oferta_id"
+        ],
+        "target": "inscripciones",
+        "remote": [
+          "id",
+          "oferta_id"
+        ]
+      },
+      {
+        "name": "asistencias_sesion_ibfk_2",
+        "local": [
+          "sesion_id",
+          "oferta_id"
+        ],
+        "target": "sesiones",
+        "remote": [
+          "id",
+          "oferta_id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "asistencias_sesion_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "asistencias_sesion_sesion_id_nonnegative",
+        "`sesion_id` >= 0"
+      ],
+      [
+        "asistencias_sesion_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "asistencias_sesion_minutos_presentes_nonnegative",
+        "`minutos_presentes` >= 0"
+      ]
+    ]
+  },
+  "aulas": {
+    "name": "aulas",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "codigo",
+        "raw_type": "varchar(20)",
+        "sql_type": "varchar(20)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(20)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "capacidad",
+        "raw_type": "smallint(5)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "aulas_codigo_key",
+        [
+          "codigo"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "aulas_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "aulas_capacidad_nonnegative",
+        "`capacidad` >= 0"
+      ]
+    ]
+  },
+  "calificaciones": {
+    "name": "calificaciones",
+    "fields": [
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "evaluacion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nota",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "inscripcion_id",
+      "evaluacion_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "calificaciones_inscripcion_id_idx",
+        [
+          "inscripcion_id",
+          "oferta_id"
+        ]
+      ],
+      [
+        "calificaciones_evaluacion_id_idx",
+        [
+          "evaluacion_id",
+          "oferta_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "calificaciones_ibfk_1",
+        "local": [
+          "inscripcion_id",
+          "oferta_id"
+        ],
+        "target": "inscripciones",
+        "remote": [
+          "id",
+          "oferta_id"
+        ]
+      },
+      {
+        "name": "calificaciones_ibfk_2",
+        "local": [
+          "evaluacion_id",
+          "oferta_id"
+        ],
+        "target": "evaluaciones",
+        "remote": [
+          "id",
+          "oferta_id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "calificaciones_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "calificaciones_evaluacion_id_nonnegative",
+        "`evaluacion_id` >= 0"
+      ],
+      [
+        "calificaciones_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "calificaciones_nota_check",
+        "`nota` between 1 and 100"
+      ]
+    ]
+  },
+  "cargos": {
+    "name": "cargos",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "concepto",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "monto",
+        "raw_type": "decimal(10,2)",
+        "sql_type": "decimal(10,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(10, 2)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "vencimiento",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "cargos_matricula_id_idx",
+        [
+          "matricula_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "cargos_ibfk_1",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "cargos_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "cargos_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "cargos_CONSTRAINT_1",
+        "`monto` > 0"
+      ]
+    ]
+  },
+  "carreras": {
+    "name": "carreras",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "codigo",
+        "raw_type": "varchar(20)",
+        "sql_type": "varchar(20)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(20)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nivel",
+        "raw_type": "varchar(50)",
+        "sql_type": "varchar(50)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(50)",
+        "nullable": false,
+        "default": "'Técnico Superior'",
+        "auto": false
+      },
+      {
+        "name": "duracion_anios",
+        "raw_type": "tinyint(3)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": "3",
+        "auto": false
+      },
+      {
+        "name": "regimen",
+        "raw_type": "enum('ANUAL','SEMESTRAL')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "ANUAL",
+          "SEMESTRAL"
+        ]
+      },
+      {
+        "name": "fuente_url",
+        "raw_type": "varchar(500)",
+        "sql_type": "varchar(500)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(500)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "activa",
+        "raw_type": "tinyint(1)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": "1",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "carreras_codigo_key",
+        [
+          "codigo"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "carreras_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "carreras_duracion_anios_nonnegative",
+        "`duracion_anios` >= 0"
+      ],
+      [
+        "carreras_regimen_enum",
+        "`regimen` IN ('ANUAL', 'SEMESTRAL')"
+      ],
+      [
+        "carreras_activa_boolean",
+        "`activa` IN (0,1)"
+      ]
+    ]
+  },
+  "cierres_oferta": {
+    "name": "cierres_oferta",
+    "fields": [
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "minutos_carga",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "cerrado_por",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "timestamp",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": "current_timestamp()",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "oferta_id"
+    ],
+    "uniques": [],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "cierres_oferta_ibfk_1",
+        "local": [
+          "oferta_id"
+        ],
+        "target": "ofertas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "cierres_oferta_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "cierres_oferta_minutos_carga_check",
+        "`minutos_carga` > 0"
+      ],
+      [
+        "cierres_oferta_minutos_carga_nonnegative",
+        "`minutos_carga` >= 0"
+      ]
+    ]
+  },
+  "defensas": {
+    "name": "defensas",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "proyecto_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "datetime",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "aula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "nota",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "acta",
+        "raw_type": "varchar(50)",
+        "sql_type": "varchar(50)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(50)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "defensas_acta_key",
+        [
+          "acta"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "defensas_proyecto_id_idx",
+        [
+          "proyecto_id"
+        ]
+      ],
+      [
+        "defensas_aula_id_idx",
+        [
+          "aula_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "defensas_ibfk_1",
+        "local": [
+          "proyecto_id"
+        ],
+        "target": "proyectos_graduacion",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "defensas_ibfk_2",
+        "local": [
+          "aula_id"
+        ],
+        "target": "aulas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "defensas_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "defensas_proyecto_id_nonnegative",
+        "`proyecto_id` >= 0"
+      ],
+      [
+        "defensas_aula_id_nonnegative",
+        "`aula_id` >= 0"
+      ],
+      [
+        "defensas_nota_check",
+        "`nota` between 0 and 100"
+      ]
+    ]
+  },
+  "docentes": {
+    "name": "docentes",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "documento",
+        "raw_type": "varchar(25)",
+        "sql_type": "varchar(25)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(25)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombres",
+        "raw_type": "varchar(80)",
+        "sql_type": "varchar(80)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(80)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "apellidos",
+        "raw_type": "varchar(100)",
+        "sql_type": "varchar(100)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(100)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "especialidad",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "telefono",
+        "raw_type": "varchar(25)",
+        "sql_type": "varchar(25)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(25)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "correo",
+        "raw_type": "varchar(150)",
+        "sql_type": "varchar(150)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(150)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "docentes_documento_key",
+        [
+          "documento"
+        ]
+      ],
+      [
+        "docentes_correo_key",
+        [
+          "correo"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "docentes_id_nonnegative",
+        "`id` >= 0"
+      ]
+    ]
+  },
+  "documentos_matricula": {
+    "name": "documentos_matricula",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "tipo_documento_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('PENDIENTE','RECIBIDO','OBSERVADO')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": "'PENDIENTE'",
+        "auto": false,
+        "enum": [
+          "PENDIENTE",
+          "RECIBIDO",
+          "OBSERVADO"
+        ]
+      },
+      {
+        "name": "fecha_recepcion",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "observacion",
+        "raw_type": "varchar(250)",
+        "sql_type": "varchar(250)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(250)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "documentos_matricula_matricula_id_key",
+        [
+          "matricula_id",
+          "tipo_documento_id"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "documentos_matricula_tipo_documento_id_idx",
+        [
+          "tipo_documento_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "documentos_matricula_ibfk_1",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "documentos_matricula_ibfk_2",
+        "local": [
+          "tipo_documento_id"
+        ],
+        "target": "tipos_documento",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "documentos_matricula_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "documentos_matricula_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "documentos_matricula_tipo_documento_id_nonnegative",
+        "`tipo_documento_id` >= 0"
+      ],
+      [
+        "documentos_matricula_estado_enum",
+        "`estado` IN ('PENDIENTE', 'RECIBIDO', 'OBSERVADO')"
+      ]
+    ]
+  },
+  "estudiantes": {
+    "name": "estudiantes",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "registro",
+        "raw_type": "varchar(20)",
+        "sql_type": "varchar(20)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(20)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "documento",
+        "raw_type": "varchar(25)",
+        "sql_type": "varchar(25)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(25)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombres",
+        "raw_type": "varchar(80)",
+        "sql_type": "varchar(80)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(80)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "apellidos",
+        "raw_type": "varchar(100)",
+        "sql_type": "varchar(100)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(100)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha_nacimiento",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "telefono",
+        "raw_type": "varchar(25)",
+        "sql_type": "varchar(25)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(25)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "correo",
+        "raw_type": "varchar(150)",
+        "sql_type": "varchar(150)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(150)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "direccion",
+        "raw_type": "varchar(200)",
+        "sql_type": "varchar(200)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(200)",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "fecha_registro",
+        "raw_type": "timestamp",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": "current_timestamp()",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "estudiantes_registro_key",
+        [
+          "registro"
+        ]
+      ],
+      [
+        "estudiantes_documento_key",
+        [
+          "documento"
+        ]
+      ],
+      [
+        "estudiantes_correo_key",
+        [
+          "correo"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "estudiantes_id_nonnegative",
+        "`id` >= 0"
+      ]
+    ]
+  },
+  "evaluaciones": {
+    "name": "evaluaciones",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(100)",
+        "sql_type": "varchar(100)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(100)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "componente",
+        "raw_type": "enum('PRACTICA','TEORIA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "PRACTICA",
+          "TEORIA"
+        ]
+      },
+      {
+        "name": "peso",
+        "raw_type": "decimal(6,3)",
+        "sql_type": "decimal(6,3)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(6, 3)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "evaluaciones_oferta_id_key",
+        [
+          "oferta_id",
+          "nombre"
+        ]
+      ],
+      [
+        "evaluaciones_id_key",
+        [
+          "id",
+          "oferta_id"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "evaluaciones_ibfk_1",
+        "local": [
+          "oferta_id"
+        ],
+        "target": "ofertas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "evaluaciones_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "evaluaciones_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "evaluaciones_componente_enum",
+        "`componente` IN ('PRACTICA', 'TEORIA')"
+      ],
+      [
+        "evaluaciones_peso_check",
+        "`peso` > 0 and `peso` <= 100"
+      ]
+    ]
+  },
+  "excepciones_asistencia": {
+    "name": "excepciones_asistencia",
+    "fields": [
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "documento",
+        "raw_type": "varchar(250)",
+        "sql_type": "varchar(250)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(250)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "resolucion",
+        "raw_type": "varchar(100)",
+        "sql_type": "varchar(100)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(100)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "aprobada_por",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "inscripcion_id"
+    ],
+    "uniques": [],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "excepciones_asistencia_ibfk_1",
+        "local": [
+          "inscripcion_id"
+        ],
+        "target": "inscripciones",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "excepciones_asistencia_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "excepciones_asistencia_CONSTRAINT_1",
+        "octet_length(trim(`documento`)) > 0 and octet_length(trim(`resolucion`)) > 0"
+      ]
+    ]
+  },
+  "grupo_integrantes": {
+    "name": "grupo_integrantes",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "grupo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "timestamp",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": "current_timestamp()",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "grupo_integrantes_matricula_id_key",
+        [
+          "matricula_id"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "grupo_integrantes_grupo_id_idx",
+        [
+          "grupo_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "grupo_integrantes_ibfk_1",
+        "local": [
+          "grupo_id"
+        ],
+        "target": "grupos",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "grupo_integrantes_ibfk_2",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "grupo_integrantes_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "grupo_integrantes_grupo_id_nonnegative",
+        "`grupo_id` >= 0"
+      ],
+      [
+        "grupo_integrantes_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ]
+    ]
+  },
+  "grupo_materias": {
+    "name": "grupo_materias",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "grupo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "grupo_materias_oferta_id_key",
+        [
+          "oferta_id"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "grupo_materias_grupo_id_idx",
+        [
+          "grupo_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "grupo_materias_ibfk_1",
+        "local": [
+          "grupo_id"
+        ],
+        "target": "grupos",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "grupo_materias_ibfk_2",
+        "local": [
+          "oferta_id"
+        ],
+        "target": "ofertas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "grupo_materias_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "grupo_materias_grupo_id_nonnegative",
+        "`grupo_id` >= 0"
+      ],
+      [
+        "grupo_materias_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ]
+    ]
+  },
+  "grupos": {
+    "name": "grupos",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "periodo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "curso",
+        "raw_type": "tinyint(3)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "paralelo",
+        "raw_type": "varchar(20)",
+        "sql_type": "varchar(20)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(20)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "turno",
+        "raw_type": "enum('MAÑANA','TARDE','NOCHE')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "MAÑANA",
+          "TARDE",
+          "NOCHE"
+        ]
+      },
+      {
+        "name": "cupo",
+        "raw_type": "smallint(5)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "tutor_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('ACTIVO','CERRADO')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": "'ACTIVO'",
+        "auto": false,
+        "enum": [
+          "ACTIVO",
+          "CERRADO"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "grupos_uq_grupo_key",
+        [
+          "periodo_id",
+          "carrera_id",
+          "curso",
+          "paralelo",
+          "turno"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "grupos_carrera_id_idx",
+        [
+          "carrera_id"
+        ]
+      ],
+      [
+        "grupos_tutor_id_idx",
+        [
+          "tutor_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "grupos_ibfk_1",
+        "local": [
+          "periodo_id"
+        ],
+        "target": "periodos",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "grupos_ibfk_2",
+        "local": [
+          "carrera_id"
+        ],
+        "target": "carreras",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "grupos_ibfk_3",
+        "local": [
+          "tutor_id"
+        ],
+        "target": "docentes",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "grupos_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "grupos_periodo_id_nonnegative",
+        "`periodo_id` >= 0"
+      ],
+      [
+        "grupos_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ],
+      [
+        "grupos_curso_nonnegative",
+        "`curso` >= 0"
+      ],
+      [
+        "grupos_turno_enum",
+        "`turno` IN ('MAÑANA', 'TARDE', 'NOCHE')"
+      ],
+      [
+        "grupos_cupo_nonnegative",
+        "`cupo` >= 0"
+      ],
+      [
+        "grupos_tutor_id_nonnegative",
+        "`tutor_id` >= 0"
+      ],
+      [
+        "grupos_estado_enum",
+        "`estado` IN ('ACTIVO', 'CERRADO')"
+      ],
+      [
+        "grupos_CONSTRAINT_1",
+        "`curso` between 1 and 6"
+      ],
+      [
+        "grupos_CONSTRAINT_2",
+        "`cupo` between 1 and 1000"
+      ]
+    ]
+  },
+  "horarios": {
+    "name": "horarios",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "aula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "dia",
+        "raw_type": "tinyint(3)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "hora_inicio",
+        "raw_type": "time",
+        "sql_type": "time(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Time(0)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "hora_fin",
+        "raw_type": "time",
+        "sql_type": "time(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Time(0)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "horarios_oferta_id_idx",
+        [
+          "oferta_id"
+        ]
+      ],
+      [
+        "horarios_aula_id_idx",
+        [
+          "aula_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "horarios_ibfk_1",
+        "local": [
+          "oferta_id"
+        ],
+        "target": "ofertas",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "horarios_ibfk_2",
+        "local": [
+          "aula_id"
+        ],
+        "target": "aulas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "horarios_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "horarios_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "horarios_aula_id_nonnegative",
+        "`aula_id` >= 0"
+      ],
+      [
+        "horarios_dia_nonnegative",
+        "`dia` >= 0"
+      ],
+      [
+        "horarios_CONSTRAINT_1",
+        "`dia` between 1 and 7"
+      ],
+      [
+        "horarios_CONSTRAINT_2",
+        "`hora_fin` > `hora_inicio`"
+      ]
+    ]
+  },
+  "inscripciones": {
+    "name": "inscripciones",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "periodo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('ACTIVA','RETIRADA','CONCLUIDA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": "'ACTIVA'",
+        "auto": false,
+        "enum": [
+          "ACTIVA",
+          "RETIRADA",
+          "CONCLUIDA"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "inscripciones_matricula_id_key",
+        [
+          "matricula_id",
+          "oferta_id"
+        ]
+      ],
+      [
+        "inscripciones_id_key",
+        [
+          "id",
+          "oferta_id"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "inscripciones_matricula_id_2_idx",
+        [
+          "matricula_id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      ],
+      [
+        "inscripciones_oferta_id_idx",
+        [
+          "oferta_id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "inscripciones_ibfk_1",
+        "local": [
+          "matricula_id",
+          "carrera_id",
+          "periodo_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      },
+      {
+        "name": "inscripciones_ibfk_2",
+        "local": [
+          "oferta_id",
+          "carrera_id",
+          "periodo_id"
+        ],
+        "target": "ofertas",
+        "remote": [
+          "id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "inscripciones_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "inscripciones_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "inscripciones_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "inscripciones_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ],
+      [
+        "inscripciones_periodo_id_nonnegative",
+        "`periodo_id` >= 0"
+      ],
+      [
+        "inscripciones_estado_enum",
+        "`estado` IN ('ACTIVA', 'RETIRADA', 'CONCLUIDA')"
+      ]
+    ]
+  },
+  "materias": {
+    "name": "materias",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "codigo",
+        "raw_type": "varchar(20)",
+        "sql_type": "varchar(20)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(20)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nivel_curso",
+        "raw_type": "tinyint(3)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "horas_semanales",
+        "raw_type": "tinyint(3)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "fuente_url",
+        "raw_type": "varchar(500)",
+        "sql_type": "varchar(500)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(500)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "materias_carrera_id_key",
+        [
+          "carrera_id",
+          "codigo"
+        ]
+      ],
+      [
+        "materias_id_key",
+        [
+          "id",
+          "carrera_id"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "materias_ibfk_1",
+        "local": [
+          "carrera_id"
+        ],
+        "target": "carreras",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "materias_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "materias_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ],
+      [
+        "materias_nivel_curso_nonnegative",
+        "`nivel_curso` >= 0"
+      ],
+      [
+        "materias_horas_semanales_nonnegative",
+        "`horas_semanales` >= 0"
+      ]
+    ]
+  },
+  "matriculas": {
+    "name": "matriculas",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "estudiante_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "periodo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('ACTIVA','RETIRADA','CONCLUIDA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": "'ACTIVA'",
+        "auto": false,
+        "enum": [
+          "ACTIVA",
+          "RETIRADA",
+          "CONCLUIDA"
+        ]
+      },
+      {
+        "name": "plan_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "matriculas_estudiante_id_key",
+        [
+          "estudiante_id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      ],
+      [
+        "matriculas_id_key",
+        [
+          "id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "matriculas_carrera_id_idx",
+        [
+          "carrera_id"
+        ]
+      ],
+      [
+        "matriculas_periodo_id_idx",
+        [
+          "periodo_id"
+        ]
+      ],
+      [
+        "matriculas_plan_id_idx",
+        [
+          "plan_id",
+          "carrera_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "matriculas_ibfk_1",
+        "local": [
+          "estudiante_id"
+        ],
+        "target": "estudiantes",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "matriculas_ibfk_2",
+        "local": [
+          "carrera_id"
+        ],
+        "target": "carreras",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "matriculas_ibfk_3",
+        "local": [
+          "periodo_id"
+        ],
+        "target": "periodos",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "matriculas_ibfk_4",
+        "local": [
+          "plan_id",
+          "carrera_id"
+        ],
+        "target": "planes_estudio",
+        "remote": [
+          "id",
+          "carrera_id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "matriculas_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "matriculas_estudiante_id_nonnegative",
+        "`estudiante_id` >= 0"
+      ],
+      [
+        "matriculas_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ],
+      [
+        "matriculas_periodo_id_nonnegative",
+        "`periodo_id` >= 0"
+      ],
+      [
+        "matriculas_estado_enum",
+        "`estado` IN ('ACTIVA', 'RETIRADA', 'CONCLUIDA')"
+      ],
+      [
+        "matriculas_plan_id_nonnegative",
+        "`plan_id` >= 0"
+      ]
+    ]
+  },
+  "modalidades_graduacion": {
+    "name": "modalidades_graduacion",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "modalidades_graduacion_nombre_key",
+        [
+          "nombre"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "modalidades_graduacion_id_nonnegative",
+        "`id` >= 0"
+      ]
+    ]
+  },
+  "notas_demo_historicas": {
+    "name": "notas_demo_historicas",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "evaluacion",
+        "raw_type": "varchar(80)",
+        "sql_type": "varchar(80)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(80)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nota",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "notas_demo_historicas_inscripcion_id_key",
+        [
+          "inscripcion_id",
+          "evaluacion"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "notas_demo_historicas_ibfk_1",
+        "local": [
+          "inscripcion_id"
+        ],
+        "target": "inscripciones",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "notas_demo_historicas_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "notas_demo_historicas_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "notas_demo_historicas_CONSTRAINT_1",
+        "`nota` between 0 and 100"
+      ]
+    ]
+  },
+  "ofertas": {
+    "name": "ofertas",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "materia_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "periodo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "docente_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "paralelo",
+        "raw_type": "varchar(10)",
+        "sql_type": "varchar(10)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(10)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "turno",
+        "raw_type": "enum('MAÑANA','TARDE','NOCHE')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "MAÑANA",
+          "TARDE",
+          "NOCHE"
+        ]
+      },
+      {
+        "name": "cupo",
+        "raw_type": "smallint(5)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "ofertas_materia_id_key",
+        [
+          "materia_id",
+          "periodo_id",
+          "paralelo"
+        ]
+      ],
+      [
+        "ofertas_id_key",
+        [
+          "id",
+          "carrera_id",
+          "periodo_id"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "ofertas_materia_id_2_idx",
+        [
+          "materia_id",
+          "carrera_id"
+        ]
+      ],
+      [
+        "ofertas_periodo_id_idx",
+        [
+          "periodo_id"
+        ]
+      ],
+      [
+        "ofertas_docente_id_idx",
+        [
+          "docente_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "ofertas_ibfk_1",
+        "local": [
+          "materia_id",
+          "carrera_id"
+        ],
+        "target": "materias",
+        "remote": [
+          "id",
+          "carrera_id"
+        ]
+      },
+      {
+        "name": "ofertas_ibfk_2",
+        "local": [
+          "periodo_id"
+        ],
+        "target": "periodos",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "ofertas_ibfk_3",
+        "local": [
+          "docente_id"
+        ],
+        "target": "docentes",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "ofertas_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "ofertas_materia_id_nonnegative",
+        "`materia_id` >= 0"
+      ],
+      [
+        "ofertas_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ],
+      [
+        "ofertas_periodo_id_nonnegative",
+        "`periodo_id` >= 0"
+      ],
+      [
+        "ofertas_docente_id_nonnegative",
+        "`docente_id` >= 0"
+      ],
+      [
+        "ofertas_turno_enum",
+        "`turno` IN ('MAÑANA', 'TARDE', 'NOCHE')"
+      ],
+      [
+        "ofertas_cupo_nonnegative",
+        "`cupo` >= 0"
+      ]
+    ]
+  },
+  "pagos": {
+    "name": "pagos",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "cargo_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "recibo",
+        "raw_type": "varchar(30)",
+        "sql_type": "varchar(30)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(30)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "monto",
+        "raw_type": "decimal(10,2)",
+        "sql_type": "decimal(10,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(10, 2)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "metodo",
+        "raw_type": "enum('EFECTIVO','TRANSFERENCIA','QR')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "EFECTIVO",
+          "TRANSFERENCIA",
+          "QR"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "pagos_recibo_key",
+        [
+          "recibo"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "pagos_cargo_id_idx",
+        [
+          "cargo_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "pagos_ibfk_1",
+        "local": [
+          "cargo_id"
+        ],
+        "target": "cargos",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "pagos_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "pagos_cargo_id_nonnegative",
+        "`cargo_id` >= 0"
+      ],
+      [
+        "pagos_metodo_enum",
+        "`metodo` IN ('EFECTIVO', 'TRANSFERENCIA', 'QR')"
+      ],
+      [
+        "pagos_CONSTRAINT_1",
+        "`monto` > 0"
+      ]
+    ]
+  },
+  "pasantias": {
+    "name": "pasantias",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "tutor_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "empresa",
+        "raw_type": "varchar(150)",
+        "sql_type": "varchar(150)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(150)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha_inicio",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha_fin",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "horas",
+        "raw_type": "smallint(5)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('SOLICITADA','EN_CURSO','CONCLUIDA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "SOLICITADA",
+          "EN_CURSO",
+          "CONCLUIDA"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "pasantias_matricula_id_idx",
+        [
+          "matricula_id"
+        ]
+      ],
+      [
+        "pasantias_tutor_id_idx",
+        [
+          "tutor_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "pasantias_ibfk_1",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "pasantias_ibfk_2",
+        "local": [
+          "tutor_id"
+        ],
+        "target": "docentes",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "pasantias_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "pasantias_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "pasantias_tutor_id_nonnegative",
+        "`tutor_id` >= 0"
+      ],
+      [
+        "pasantias_horas_nonnegative",
+        "`horas` >= 0"
+      ],
+      [
+        "pasantias_estado_enum",
+        "`estado` IN ('SOLICITADA', 'EN_CURSO', 'CONCLUIDA')"
+      ],
+      [
+        "pasantias_CONSTRAINT_1",
+        "`fecha_fin` is null or `fecha_fin` >= `fecha_inicio`"
+      ]
+    ]
+  },
+  "periodos": {
+    "name": "periodos",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(30)",
+        "sql_type": "varchar(30)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(30)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha_inicio",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha_fin",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "periodos_nombre_key",
+        [
+          "nombre"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "periodos_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "periodos_CONSTRAINT_1",
+        "`fecha_fin` >= `fecha_inicio`"
+      ]
+    ]
+  },
+  "plan_materias": {
+    "name": "plan_materias",
+    "fields": [
+      {
+        "name": "plan_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "materia_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "plan_id",
+      "materia_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "plan_materias_plan_id_idx",
+        [
+          "plan_id",
+          "carrera_id"
+        ]
+      ],
+      [
+        "plan_materias_materia_id_idx",
+        [
+          "materia_id",
+          "carrera_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "plan_materias_ibfk_1",
+        "local": [
+          "plan_id",
+          "carrera_id"
+        ],
+        "target": "planes_estudio",
+        "remote": [
+          "id",
+          "carrera_id"
+        ]
+      },
+      {
+        "name": "plan_materias_ibfk_2",
+        "local": [
+          "materia_id",
+          "carrera_id"
+        ],
+        "target": "materias",
+        "remote": [
+          "id",
+          "carrera_id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "plan_materias_plan_id_nonnegative",
+        "`plan_id` >= 0"
+      ],
+      [
+        "plan_materias_materia_id_nonnegative",
+        "`materia_id` >= 0"
+      ],
+      [
+        "plan_materias_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ]
+    ]
+  },
+  "planes_estudio": {
+    "name": "planes_estudio",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "carrera_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "denominacion",
+        "raw_type": "varchar(100)",
+        "sql_type": "varchar(100)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(100)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "cohorte",
+        "raw_type": "varchar(30)",
+        "sql_type": "varchar(30)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(30)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "regla_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "planes_estudio_id_key",
+        [
+          "id",
+          "carrera_id"
+        ]
+      ],
+      [
+        "planes_estudio_carrera_id_key",
+        [
+          "carrera_id",
+          "denominacion",
+          "cohorte"
+        ]
+      ]
+    ],
+    "indexes": [
+      [
+        "planes_estudio_regla_id_idx",
+        [
+          "regla_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "planes_estudio_ibfk_1",
+        "local": [
+          "carrera_id"
+        ],
+        "target": "carreras",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "planes_estudio_ibfk_2",
+        "local": [
+          "regla_id"
+        ],
+        "target": "reglas_evaluacion",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "planes_estudio_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "planes_estudio_carrera_id_nonnegative",
+        "`carrera_id` >= 0"
+      ],
+      [
+        "planes_estudio_regla_id_nonnegative",
+        "`regla_id` >= 0"
+      ]
+    ]
+  },
+  "prerrequisitos": {
+    "name": "prerrequisitos",
+    "fields": [
+      {
+        "name": "plan_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "materia_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "requerida_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "plan_id",
+      "materia_id",
+      "requerida_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "prerrequisitos_plan_id_idx",
+        [
+          "plan_id",
+          "requerida_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "prerrequisitos_ibfk_1",
+        "local": [
+          "plan_id",
+          "materia_id"
+        ],
+        "target": "plan_materias",
+        "remote": [
+          "plan_id",
+          "materia_id"
+        ]
+      },
+      {
+        "name": "prerrequisitos_ibfk_2",
+        "local": [
+          "plan_id",
+          "requerida_id"
+        ],
+        "target": "plan_materias",
+        "remote": [
+          "plan_id",
+          "materia_id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "prerrequisitos_plan_id_nonnegative",
+        "`plan_id` >= 0"
+      ],
+      [
+        "prerrequisitos_materia_id_nonnegative",
+        "`materia_id` >= 0"
+      ],
+      [
+        "prerrequisitos_requerida_id_nonnegative",
+        "`requerida_id` >= 0"
+      ],
+      [
+        "prerrequisitos_CONSTRAINT_1",
+        "`materia_id` <> `requerida_id`"
+      ]
+    ]
+  },
+  "proyectos_graduacion": {
+    "name": "proyectos_graduacion",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "modalidad_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "tutor_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      },
+      {
+        "name": "titulo",
+        "raw_type": "varchar(250)",
+        "sql_type": "varchar(250)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(250)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('PROPUESTO','EN_DESARROLLO','DEFENDIDO','APROBADO')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "PROPUESTO",
+          "EN_DESARROLLO",
+          "DEFENDIDO",
+          "APROBADO"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "proyectos_graduacion_matricula_id_idx",
+        [
+          "matricula_id"
+        ]
+      ],
+      [
+        "proyectos_graduacion_modalidad_id_idx",
+        [
+          "modalidad_id"
+        ]
+      ],
+      [
+        "proyectos_graduacion_tutor_id_idx",
+        [
+          "tutor_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "proyectos_graduacion_ibfk_1",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "proyectos_graduacion_ibfk_2",
+        "local": [
+          "modalidad_id"
+        ],
+        "target": "modalidades_graduacion",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "proyectos_graduacion_ibfk_3",
+        "local": [
+          "tutor_id"
+        ],
+        "target": "docentes",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "proyectos_graduacion_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "proyectos_graduacion_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "proyectos_graduacion_modalidad_id_nonnegative",
+        "`modalidad_id` >= 0"
+      ],
+      [
+        "proyectos_graduacion_tutor_id_nonnegative",
+        "`tutor_id` >= 0"
+      ],
+      [
+        "proyectos_graduacion_estado_enum",
+        "`estado` IN ('PROPUESTO', 'EN_DESARROLLO', 'DEFENDIDO', 'APROBADO')"
+      ]
+    ]
+  },
+  "recuperaciones": {
+    "name": "recuperaciones",
+    "fields": [
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nota_prueba",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nota_registrada",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "inscripcion_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "recuperaciones_matricula_id_idx",
+        [
+          "matricula_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "recuperaciones_ibfk_1",
+        "local": [
+          "inscripcion_id"
+        ],
+        "target": "resultados_finales",
+        "remote": [
+          "inscripcion_id"
+        ]
+      },
+      {
+        "name": "recuperaciones_ibfk_2",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "recuperaciones_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "recuperaciones_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "recuperaciones_nota_prueba_check",
+        "`nota_prueba` between 1 and 100"
+      ]
+    ]
+  },
+  "reglas_evaluacion": {
+    "name": "reglas_evaluacion",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(120)",
+        "sql_type": "varchar(120)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(120)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fuente",
+        "raw_type": "varchar(500)",
+        "sql_type": "varchar(500)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(500)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "minimo",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": "1.00",
+        "auto": false
+      },
+      {
+        "name": "maximo",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": "100.00",
+        "auto": false
+      },
+      {
+        "name": "aprobacion",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": "61.00",
+        "auto": false
+      },
+      {
+        "name": "practica",
+        "raw_type": "decimal(4,3)",
+        "sql_type": "decimal(4,3)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(4, 3)",
+        "nullable": false,
+        "default": "0.700",
+        "auto": false
+      },
+      {
+        "name": "teoria",
+        "raw_type": "decimal(4,3)",
+        "sql_type": "decimal(4,3)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(4, 3)",
+        "nullable": false,
+        "default": "0.300",
+        "auto": false
+      },
+      {
+        "name": "asistencia",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": "80.00",
+        "auto": false
+      },
+      {
+        "name": "acceso_recuperacion",
+        "raw_type": "decimal(5,2)",
+        "sql_type": "decimal(5,2)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(5, 2)",
+        "nullable": false,
+        "default": "40.00",
+        "auto": false
+      },
+      {
+        "name": "max_rec_anual",
+        "raw_type": "tinyint(4)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": "3",
+        "auto": false
+      },
+      {
+        "name": "max_rec_semestral",
+        "raw_type": "tinyint(4)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": "2",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "reglas_evaluacion_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "reglas_evaluacion_minimo_check",
+        "`minimo` = 1"
+      ],
+      [
+        "reglas_evaluacion_maximo_check",
+        "`maximo` = 100"
+      ],
+      [
+        "reglas_evaluacion_aprobacion_check",
+        "`aprobacion` = 61"
+      ],
+      [
+        "reglas_evaluacion_practica_check",
+        "`practica` = 0.700"
+      ],
+      [
+        "reglas_evaluacion_teoria_check",
+        "`teoria` = 0.300"
+      ],
+      [
+        "reglas_evaluacion_asistencia_check",
+        "`asistencia` = 80"
+      ],
+      [
+        "reglas_evaluacion_acceso_recuperacion_check",
+        "`acceso_recuperacion` = 40"
+      ],
+      [
+        "reglas_evaluacion_max_rec_anual_check",
+        "`max_rec_anual` = 3"
+      ],
+      [
+        "reglas_evaluacion_max_rec_semestral_check",
+        "`max_rec_semestral` = 2"
+      ]
+    ]
+  },
+  "resultados_finales": {
+    "name": "resultados_finales",
+    "fields": [
+      {
+        "name": "inscripcion_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "regla_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "promedio",
+        "raw_type": "decimal(8,5)",
+        "sql_type": "decimal(8,5)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(8, 5)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "porcentaje_asistencia",
+        "raw_type": "decimal(8,5)",
+        "sql_type": "decimal(8,5)",
+        "prisma_type": "Decimal",
+        "native": "@db.Decimal(8, 5)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "excepcion_documentada",
+        "raw_type": "tinyint(1)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('APROBADO','REPROBADO','REPROBADO_ASISTENCIA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "APROBADO",
+          "REPROBADO",
+          "REPROBADO_ASISTENCIA"
+        ]
+      },
+      {
+        "name": "fecha",
+        "raw_type": "timestamp",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": "current_timestamp()",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "inscripcion_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "resultados_finales_regla_id_idx",
+        [
+          "regla_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "resultados_finales_ibfk_1",
+        "local": [
+          "inscripcion_id"
+        ],
+        "target": "inscripciones",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "resultados_finales_ibfk_2",
+        "local": [
+          "regla_id"
+        ],
+        "target": "reglas_evaluacion",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "resultados_finales_inscripcion_id_nonnegative",
+        "`inscripcion_id` >= 0"
+      ],
+      [
+        "resultados_finales_regla_id_nonnegative",
+        "`regla_id` >= 0"
+      ],
+      [
+        "resultados_finales_excepcion_documentada_boolean",
+        "`excepcion_documentada` IN (0,1)"
+      ],
+      [
+        "resultados_finales_estado_enum",
+        "`estado` IN ('APROBADO', 'REPROBADO', 'REPROBADO_ASISTENCIA')"
+      ]
+    ]
+  },
+  "sesiones": {
+    "name": "sesiones",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "oferta_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "inicio",
+        "raw_type": "datetime",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "fin",
+        "raw_type": "datetime",
+        "sql_type": "timestamp(0)",
+        "prisma_type": "DateTime",
+        "native": "@db.Timestamp(0)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('PROGRAMADA','REALIZADA','CANCELADA')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": "'PROGRAMADA'",
+        "auto": false,
+        "enum": [
+          "PROGRAMADA",
+          "REALIZADA",
+          "CANCELADA"
+        ]
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "sesiones_id_key",
+        [
+          "id",
+          "oferta_id"
+        ]
+      ],
+      [
+        "sesiones_oferta_id_key",
+        [
+          "oferta_id",
+          "inicio"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [
+      {
+        "name": "sesiones_ibfk_1",
+        "local": [
+          "oferta_id"
+        ],
+        "target": "ofertas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "sesiones_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "sesiones_oferta_id_nonnegative",
+        "`oferta_id` >= 0"
+      ],
+      [
+        "sesiones_estado_enum",
+        "`estado` IN ('PROGRAMADA', 'REALIZADA', 'CANCELADA')"
+      ],
+      [
+        "sesiones_CONSTRAINT_1",
+        "`fin` > `inicio`"
+      ]
+    ]
+  },
+  "tipos_documento": {
+    "name": "tipos_documento",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "nombre",
+        "raw_type": "varchar(100)",
+        "sql_type": "varchar(100)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(100)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [
+      [
+        "tipos_documento_nombre_key",
+        [
+          "nombre"
+        ]
+      ]
+    ],
+    "indexes": [],
+    "fks": [],
+    "checks": [
+      [
+        "tipos_documento_id_nonnegative",
+        "`id` >= 0"
+      ]
+    ]
+  },
+  "tramites": {
+    "name": "tramites",
+    "fields": [
+      {
+        "name": "id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": true
+      },
+      {
+        "name": "matricula_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "tipo",
+        "raw_type": "enum('CAMBIO_CARRERA','MATERIA_REPROBADA','PRORROGA_DIPLOMA','OTRO')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "CAMBIO_CARRERA",
+          "MATERIA_REPROBADA",
+          "PRORROGA_DIPLOMA",
+          "OTRO"
+        ]
+      },
+      {
+        "name": "fecha",
+        "raw_type": "date",
+        "sql_type": "date",
+        "prisma_type": "DateTime",
+        "native": "@db.Date",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "estado",
+        "raw_type": "enum('SOLICITADO','EN_REVISION','APROBADO','RECHAZADO')",
+        "sql_type": "varchar(32)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(32)",
+        "nullable": false,
+        "default": null,
+        "auto": false,
+        "enum": [
+          "SOLICITADO",
+          "EN_REVISION",
+          "APROBADO",
+          "RECHAZADO"
+        ]
+      },
+      {
+        "name": "detalle",
+        "raw_type": "text",
+        "sql_type": "text",
+        "prisma_type": "String",
+        "native": "@db.Text",
+        "nullable": true,
+        "default": "NULL",
+        "auto": false
+      }
+    ],
+    "pk": [
+      "id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "tramites_matricula_id_idx",
+        [
+          "matricula_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "tramites_ibfk_1",
+        "local": [
+          "matricula_id"
+        ],
+        "target": "matriculas",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "tramites_id_nonnegative",
+        "`id` >= 0"
+      ],
+      [
+        "tramites_matricula_id_nonnegative",
+        "`matricula_id` >= 0"
+      ],
+      [
+        "tramites_tipo_enum",
+        "`tipo` IN ('CAMBIO_CARRERA', 'MATERIA_REPROBADA', 'PRORROGA_DIPLOMA', 'OTRO')"
+      ],
+      [
+        "tramites_estado_enum",
+        "`estado` IN ('SOLICITADO', 'EN_REVISION', 'APROBADO', 'RECHAZADO')"
+      ]
+    ]
+  },
+  "tribunales": {
+    "name": "tribunales",
+    "fields": [
+      {
+        "name": "defensa_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "docente_id",
+        "raw_type": "int(10)",
+        "sql_type": "integer",
+        "prisma_type": "Int",
+        "native": "",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      },
+      {
+        "name": "funcion",
+        "raw_type": "varchar(50)",
+        "sql_type": "varchar(50)",
+        "prisma_type": "String",
+        "native": "@db.VarChar(50)",
+        "nullable": false,
+        "default": null,
+        "auto": false
+      }
+    ],
+    "pk": [
+      "defensa_id",
+      "docente_id"
+    ],
+    "uniques": [],
+    "indexes": [
+      [
+        "tribunales_docente_id_idx",
+        [
+          "docente_id"
+        ]
+      ]
+    ],
+    "fks": [
+      {
+        "name": "tribunales_ibfk_1",
+        "local": [
+          "defensa_id"
+        ],
+        "target": "defensas",
+        "remote": [
+          "id"
+        ]
+      },
+      {
+        "name": "tribunales_ibfk_2",
+        "local": [
+          "docente_id"
+        ],
+        "target": "docentes",
+        "remote": [
+          "id"
+        ]
+      }
+    ],
+    "checks": [
+      [
+        "tribunales_defensa_id_nonnegative",
+        "`defensa_id` >= 0"
+      ],
+      [
+        "tribunales_docente_id_nonnegative",
+        "`docente_id` >= 0"
+      ]
+    ]
+  }
+}

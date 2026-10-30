@@ -1,0 +1,14 @@
+import { spawn } from 'node:child_process';
+import { mkdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { config } from 'dotenv';
+const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
+config({ path: resolve(root, '.env'), quiet: true });
+const db = new URL(process.env.DATABASE_URL || '');
+const dir = resolve(root, 'backups'); await mkdir(dir, { recursive: true });
+const file = resolve(dir, `itsc_postgres_${new Date().toISOString().replace(/[:.]/g, '-')}.dump`);
+const exe = process.platform === 'win32' ? 'C:\\Program Files\\PostgreSQL\\18\\bin\\pg_dump.exe' : 'pg_dump';
+const child = spawn(exe, ['-h', db.hostname, '-p', db.port || '5432', '-U', decodeURIComponent(db.username), '-d', db.pathname.slice(1), '-Fc', '-f', file], { windowsHide: true, stdio: 'inherit', env: { ...process.env, PGPASSWORD: decodeURIComponent(db.password) } });
+child.on('error', error => { console.error(error.message); process.exitCode = 1; });
+child.on('exit', code => { if (code) process.exitCode = code; else console.log(`Respaldo creado: ${file}`); });

@@ -1,0 +1,1 @@
+export default function NotFound() { return <main className="standalone"><section className="panel"><h1>Página no encontrada</h1><p>La dirección solicitada no existe.</p><a className="button" href="/">Volver al portal →</a></section></main>; }

@@ -1,0 +1,151 @@
+/* ITSC: verde y blanco. Referencia: sitio institucional, consulta 16/10/2026.
+   Verdes publicados en preset7.css: #2ba84a y #1b6b36.
+   Tonos oscuros y fondos derivados para legibilidad en la aplicación. */
+:root {
+  --institucional: #1b6b36;
+  --institucional-vivo: #2ba84a;
+  --institucional-oscuro: #104629;
+  --ink: #183a26;
+  --muted: #5c6e62;
+  --green: var(--institucional);
+  --dark: var(--institucional-oscuro);
+  --line: #dce6df;
+  --paper: #f4f7f5;
+  --accent: #ffffff;
+}
+body { background: var(--paper); color: var(--ink); }
+.subtle, .muted { color: var(--muted); }
+.eyebrow span { color: #788c7e; }
+.brand { color: #fff; gap: 11px; letter-spacing: .9px; }
+.brand strong { letter-spacing: .8px; }
+.institutional-logo {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  object-fit: contain;
+  padding: 3px;
+  background: #fff;
+  border: 1px solid #d7e5da;
+  border-radius: 10px;
+}
+.sidebar { background: var(--dark); box-shadow: 3px 0 18px #1046290a; }
+.sidebar .brand { padding: 0 6px; }
+.workspace-label { color: #d1e7d7; border-color: #ffffff29; }
+.dot { background: #70dc88; }
+.sidebar nav { scrollbar-color: #528e62 transparent; }
+.nav-group { color: #a5d6b2; }
+.nav-link { color: #e1eee5; }
+.nav-link:hover { background: #ffffff12; color: #fff; }
+.nav-link.active {
+  background: #fff;
+  color: #14582b;
+  box-shadow: inset 4px 0 0 #2ba84a;
+}
+.sidebar-footer { border-color: #ffffff29; }
+.sidebar-footer small { color: #b9dbc2; }
+.avatar { color: #fff; background: #257b40; }
+.topbar { background: #fff; border-top: 4px solid #1b6b36; color: #637b6a; }
+.topbar strong { color: #245a35; }
+.divider { color: #809587; }
+.pill {
+  background: #edf8ef;
+  border-color: #b9d9c1;
+  color: #246336;
+}
+.text-button { color: #3c6549; }
+.text-button:hover { color: #0e5628; text-decoration: underline; }
+.welcome-banner {
+  background: linear-gradient(115deg, #104629 0%, #1b6b36 68%, #268d42 100%);
+  color: #fff;
+  border: 1px solid #1b6b36;
+  box-shadow: 0 8px 22px #1046290c;
+}
+.welcome-banner .eyebrow { color: #d0f2d8; }
+.welcome-banner h2 { color: #fff; }
+.welcome-banner p { color: #e1f0e5; }
+.banner-art > span { color: #fff; }
+.orbit { border-color: #a5dfb477; }
+.banner-art:before { border-color: #d5efdb66; }
+.stat { border-color: #dce6df; border-top: 3px solid #d5e8db; }
+.stat > span { color: #45624e; }
+.stat small { color: #607466; }
+.stat.accent {
+  background: #1b6b36;
+  border-color: #1b6b36;
+  border-top-color: #2ba84a;
+}
+.stat.accent > span, .stat.accent small { color: #e0f0e4; }
+.panel { border-color: #dce6df; box-shadow: 0 2px 5px #173f2503; }
+.panel-heading > span { color: #578365; }
+.quick-card { background: #f7faf8; border-color: #dfe9e2; }
+.quick-card:hover { background: #edf8ef; border-color: #6dab7f; }
+.quick-number { color: #276f3d; font-weight: 700; }
+.quick-card h3 { color: #1c512f; }
+.quick-card p { color: #597060; }
+.rules-card { background: #edf6ef; border-color: #d2e4d7; }
+.rule { border-color: #ccdfd2; }
+.rule strong { color: #1b6b36; }
+.rule span, .rules-card small { color: #4d6857; }
+.footnote, .app-footer { color: #607367; }
+.notice { background: #edf8ef; color: #205d31; border-color: #acd0b6; }
+.notice.error { background: #fff2ef; color: #943e29; border-color: #e5b6a7; }
+.plus { color: #1b6b36; }
+.summary-hint { color: #5b7163; }
+.field { color: #304f3a; }
+.field b { color: #52745d; }
+.field input, .field select {
+  background: #fff;
+  color: #203e2a;
+  border-color: #becfc3;
+}
+.field input:focus, .field select:focus {
+  outline-color: #94c9a3;
+  border-color: #1b6b36;
+}
+.form-footer > span { color: #607367; }
+.button { background: #1b6b36; border-color: #1b6b36; color: #fff; }
+.button:hover { background: #104e27; border-color: #104e27; }
+.button.secondary { background: #fff; color: #1b6b36; border-color: #a9c7b3; }
+.button.secondary:hover { background: #edf8ef; }
+.count { background: #eaf6ed; border-color: #c4dfcc; color: #28663b; }
+.search { border-color: #c8d8ce; color: #557a61; background: #fff; }
+.search:focus-within { outline: 2px solid #94c9a3; outline-offset: 2px; }
+.search input { color: #254b32; }
+.search input::placeholder { color: #667c6d; }
+th { background: #eaf3ed; color: #335f41; border-color: #d5e3da; }
+td { color: #354e3d; border-color: #e8efe9; }
+tbody tr:hover { background: #f0f8f2; }
+.table-footer, .empty { color: #607367; }
+.login-story {
+  background: linear-gradient(150deg, #104629, #1b6b36);
+  color: #fff;
+}
+.login-story .institutional-logo { width: 88px; height: 88px; flex-basis: 88px; padding: 4px; }
+.login-story:after { border-color: #7fb68d66; }
+.story-copy .eyebrow { color: #c8f1d2; }
+.story-copy h1 { color: #fff; }
+.story-copy p { color: #dfefe3; }
+.story-stats strong { color: #fff; }
+.story-stats span { color: #d5ecdc; }
+.login-story > small { color: #c6e4cf; }
+.login-form { background: #fff; }
+.login-card h2 { color: #174e2a; }
+.login-card .field input { background: #f9fcfa; }
+.login-help, .demo-note { color: #587160; }
+.demo-note { border-color: #dce8e0; }
+.demo-note .dot { background: #1b6b36; }
+@media(max-width:760px) {
+  .sidebar { border-bottom: 3px solid #2ba84a; }
+  .sidebar .institutional-logo { width: 53px; height: 53px; flex-basis: 53px; }
+  .sidebar .brand { padding: 0; }
+  .login-story .institutional-logo { width: 64px; height: 64px; flex-basis: 64px; }
+  .topbar > span { max-width: 36%; }
+  .top-actions { gap: 6px; }
+  .top-actions .pill { display: none; }
+}
+@media print {
+  body { background: #fff; }
+  h1, h2 { color: #1b6b36; }
+  th { background: #edf5ef; color: #173a24; }
+  td { color: #1d3023; }
+}

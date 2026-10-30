@@ -1,0 +1,7 @@
+* text=auto
+*.sql -text
+*.png binary
+*.jpg binary
+*.docx binary
+*.pdf binary
+*.zip binary
